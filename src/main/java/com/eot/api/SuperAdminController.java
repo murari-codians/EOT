@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eot.core.EOTConstants;
 import com.eot.domain.model.SuperAdmin;
 import com.eot.domain.service.SuperAdminService;
 
@@ -38,7 +39,7 @@ public class SuperAdminController {
 	public @ResponseBody Object add(@RequestBody SuperAdmin superAdmin) {
 		try {
 			superAdminService.saveOrUpdate(superAdmin);
-			return new String("Superadmin created successfully");
+			return new String(EOTConstants.SUPERADMIN_LOGIN_SUCCESS);
 
 		} catch (EOTException e) {
 			e.printStackTrace();
