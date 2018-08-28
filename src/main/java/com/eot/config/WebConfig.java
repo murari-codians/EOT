@@ -9,4 +9,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan({"com.eot"})
 public class WebConfig {
 
+	public WebConfig()
+	{
+		System.out.println("inside webConfig");
+	}
 }

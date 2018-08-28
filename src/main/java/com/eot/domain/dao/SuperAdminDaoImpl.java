@@ -10,49 +10,39 @@ import org.springframework.stereotype.Repository;
 
 import com.eot.domain.model.SuperAdmin;
 
-/**
- * @author murari
- *
- */
 @Repository
 public class SuperAdminDaoImpl implements SuperAdminDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	protected Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<SuperAdmin> getListSuperAdmin() {
-		Criteria criteria = getSession().createCriteria(SuperAdmin.class);
-		if (criteria.list().size() == 0) {
-			return null;
-		} else {
-			return (List<SuperAdmin>) criteria.list();
-		}
-	}
-
-	public void saveOrUpdate(SuperAdmin superAdmin) {
-
-		getSession().saveOrUpdate(superAdmin);
-	}
-
-	public void deleteSuperAdmin(int id) {
-
-		SuperAdmin superAdmin = (SuperAdmin) getSession().get(SuperAdmin.class, id);
-		getSession().delete(superAdmin);
-	}
-
-	public SuperAdmin findSuperAdminById(int id) {
-		return (SuperAdmin) getSession().get(SuperAdmin.class, id);
-	}
 	
+	
+    protected Session getSession() {
+    	return sessionFactory.getCurrentSession();
+    }
+    
+
 	@Override
-	public SuperAdmin findAdminByUserId(Long userId) {
+	public void saveOrUpadte(SuperAdmin admin) {
+		getSession().saveOrUpdate(admin);
+	}
+
+	@Override
+	public void deleteAdmin(String userId) {
 		Criteria criteria = getSession().createCriteria(SuperAdmin.class);
-		@SuppressWarnings("unchecked")
+		List<SuperAdmin> admins = (List<SuperAdmin>)criteria.list();
+		for(SuperAdmin admin:admins)
+		{
+			if(admin.getUserId().equals(userId))
+				getSession().delete(admin);
+				
+		}
+		
+	}
+
+	@Override
+	public SuperAdmin findAdminByUserId(String userId) {
+		Criteria criteria = getSession().createCriteria(SuperAdmin.class);
 		List<SuperAdmin> admins = (List<SuperAdmin>)criteria.list();
 		for(SuperAdmin admin:admins)
 		{
@@ -60,6 +50,15 @@ public class SuperAdminDaoImpl implements SuperAdminDao {
 			return admin;
 		}
 		return null;
+		
+	}
+
+	@Override
+	public SuperAdmin getAdmin() {
+	
+		Criteria criteria = getSession().createCriteria(SuperAdmin.class);
+		List<SuperAdmin> admin = (List<SuperAdmin>)criteria.list();
+		return (admin.size() == 0 )? null:admin.get(0);
 		
 	}
 

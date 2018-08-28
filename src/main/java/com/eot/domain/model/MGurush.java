@@ -2,56 +2,58 @@ package com.eot.domain.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "superAdminInfo")
-public class SuperAdmin {
-
-	public SuperAdmin() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+@Table(name = "Mgurush")
+public class MGurush {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	
 	private String userName;
+	
 
-	private String password;
-	
-	private boolean isActive = false;
-	
-	
 	@Column(unique = true)
 	private String userId;
-
+	
+	private String password;
+	
+	private boolean isActive;
+	
 	private Long userType;
 	
-    private Date createdDate;
+	private Date createdDate;
 
-    
-    private boolean accountEnabled = false ;
+	private boolean accountEnabled = false ;
 
-    
-    private boolean credentialExpired = false;
-
-    private Integer loginAttempts = 3;
-
-   
-    private Date updateDate;
-
-	public String getUserId() {
-		return userId;
+	private Date updateDate;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private TransactionLimit transactionLimit;
+	
+	
+	public TransactionLimit getTransactionLimit() {
+		return transactionLimit;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setTransactionLimit(TransactionLimit transactionLimit) {
+		this.transactionLimit = transactionLimit;
+	}
+
+	public Long getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Long userType) {
+		this.userType = userType;
 	}
 
 	public Long getId() {
@@ -70,6 +72,14 @@ public class SuperAdmin {
 		this.userName = userName;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -84,14 +94,6 @@ public class SuperAdmin {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
-	}
-
-	public Long getUserType() {
-		return userType;
-	}
-
-	public void setUserType(Long userType) {
-		this.userType = userType;
 	}
 
 	public Date getCreatedDate() {
@@ -110,22 +112,6 @@ public class SuperAdmin {
 		this.accountEnabled = accountEnabled;
 	}
 
-	public boolean isCredentialExpired() {
-		return credentialExpired;
-	}
-
-	public void setCredentialExpired(boolean credentialExpired) {
-		this.credentialExpired = credentialExpired;
-	}
-
-	public Integer getLoginAttempts() {
-		return loginAttempts;
-	}
-
-	public void setLoginAttempts(Integer loginAttempts) {
-		this.loginAttempts = loginAttempts;
-	}
-
 	public Date getUpdateDate() {
 		return updateDate;
 	}
@@ -135,4 +121,5 @@ public class SuperAdmin {
 	}
 	
 
+	
 }

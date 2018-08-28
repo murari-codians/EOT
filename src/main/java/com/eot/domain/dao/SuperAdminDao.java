@@ -5,14 +5,14 @@ import java.util.List;
 import com.eot.domain.model.SuperAdmin;
 
 public interface SuperAdminDao {
+	
+	public void saveOrUpadte(SuperAdmin admin);
+	
+	public void deleteAdmin(String userId);
+	
+	
+	public SuperAdmin getAdmin();
 
-	public List<SuperAdmin> getListSuperAdmin();
-	
-	public void saveOrUpdate(SuperAdmin superAdmin);
-	
-	public void deleteSuperAdmin(int id);
-	
-	public SuperAdmin findSuperAdminById(int id);
+	public SuperAdmin findAdminByUserId(String string);
 
-	public SuperAdmin findAdminByUserId(Long userId);
 }
