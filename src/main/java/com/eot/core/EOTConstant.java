@@ -21,5 +21,7 @@ public interface EOTConstant {
 	public static String SUPERADMIN_ALREADY_EXISTS = "super admin already exits";
 	
 	public static Integer LOGINMAXATTEMPTS = new Integer(3);
+	
+	public static String MGURUSH_ALREADY_EXISTS = "mgurush already exits";
 
 }
