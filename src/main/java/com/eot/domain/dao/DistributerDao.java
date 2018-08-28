@@ -6,5 +6,7 @@ public interface DistributerDao {
 	
 	
 	public void saveOrUpdate(Distributer distributer);
+	
+	
 
 }

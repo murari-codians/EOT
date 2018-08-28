@@ -5,6 +5,6 @@ import com.eot.util.EotException;
 
 public interface AgentService {
 	
-	public void saveOrUpdate(Agent agent) throws EotException;
+	public void saveOrUpdate(String userId, Agent agent) throws EotException;
 
 }
