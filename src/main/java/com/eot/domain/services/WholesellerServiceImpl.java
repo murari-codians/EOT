@@ -17,6 +17,8 @@ public class WholesellerServiceImpl implements WholesellerService {
 
 	@Autowired
 	WholesellerDao wholesellerDao;
+	
+	
 
 	@Override
 	public void saveOrUpdate(Wholeseller wholeseller) throws EotException {
@@ -26,5 +28,10 @@ public class WholesellerServiceImpl implements WholesellerService {
 		wholeseller.setUpdateDate(new Date());
 		wholesellerDao.saveOrUpdate(wholeseller);
 
+	}
+
+	@Override
+	public Wholeseller findWholesellerByUserId(String userId) throws EotException {
+		return wholesellerDao.findWholesellerByUserId(userId);
 	}
 }

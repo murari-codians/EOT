@@ -6,4 +6,6 @@ import com.eot.util.EotException;
 public interface WholesellerService {
 
 	public void saveOrUpdate(Wholeseller wholeseller) throws EotException;
+
+	Wholeseller findWholesellerByUserId(String userId) throws EotException;
 }
