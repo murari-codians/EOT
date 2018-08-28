@@ -23,5 +23,7 @@ public interface EOTConstant {
 	public static Integer LOGINMAXATTEMPTS = new Integer(3);
 	
 	public static String MGURUSH_ALREADY_EXISTS = "mgurush already exits";
+	
+	public static String MGURUSH_UPDATED_SUCESSFULLY = "mgurush updated sucessfully";
 
 }
