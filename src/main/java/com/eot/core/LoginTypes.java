@@ -2,7 +2,10 @@ package com.eot.core;
 
 public enum LoginTypes {
 
-	SUPERADMIN("SUPERADMIN", 10), MGURUSH("MGURUSH", 20);
+	SUPERADMIN("SUPERADMIN", 10), 
+	MGURUSH("MGURUSH", 20),
+	DISTRIBUTER("DISTRIBUTOR", 30),
+	WHOLSELLER("WHOLESELLER", 40);
 
 	private final String key;
 	private final Long value;

@@ -69,7 +69,7 @@ public class LoginServiceImp implements LoginService {
 	@Override
 	public Login findLoginByUserId(String userId) throws EotException {
 		// TODO Auto-generated method stub
-		return null;
+		return  loginDao.findLoginByUserId(userId);
 	}
 
 }
