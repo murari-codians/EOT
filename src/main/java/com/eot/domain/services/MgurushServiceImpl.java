@@ -28,6 +28,10 @@ public class MgurushServiceImpl  implements MgurushService{
 	
 	@Override
 	public void saveOrUpadte(MGurush mgurush) throws EotException {
+		MGurush gurush = mgurushDao.findMgurushByUserId(mgurush.getUserId());
+		if(gurush!=null) {
+			throw new EotException("Mgurush already exits");
+		}else {
 		Login login = new Login();
 		login.setUserId(mgurush.getUserId());
 		login.setPassword(mgurush.getPassword());
@@ -35,7 +39,9 @@ public class MgurushServiceImpl  implements MgurushService{
 		loginDao.saveLogin(login);
 		
 		mgurush.setCreatedDate(new Date());
+		mgurush.setUpdateDate(new Date());
 		mgurushDao.saveOrUpdate(mgurush);
+		}
 	}
 
 	@Override
@@ -54,17 +60,31 @@ public class MgurushServiceImpl  implements MgurushService{
 	public void updateMgurush(MGurush mgurush) throws EotException {
 		
 		MGurush gurush = mgurushDao.findMgurushByUserId(mgurush.getUserId());
-        Login login = loginDao.findLoginByUserId(mgurush.getUserId());
 		if(gurush!=null) {
-		login.setUserId(mgurush.getUserId());
-		login.setPassword(mgurush.getPassword());
+        Login login = loginDao.findLoginByUserId(gurush.getUserId());
+		if(mgurush.getUserType()!=null)
 		login.setUserType(mgurush.getUserType());
+		if(mgurush.getPassword()!=null) 
+		login.setPassword(mgurush.getPassword());
 		loginDao.saveLogin(login);
 		
-		mgurush.setId(gurush.getId());
-		mgurush.getTransactionLimit().setId(gurush.getTransactionLimit().getId());
-		mgurush.setUpdateDate(new Date());
-		mgurushDao.update(mgurush);
+		gurush.setId(gurush.getId());
+		gurush.getTransactionLimit().setId(gurush.getTransactionLimit().getId());
+		gurush.setUpdateDate(new Date());
+		
+		if(mgurush.getTransactionLimit()!=null)
+		gurush.setTransactionLimit(mgurush.getTransactionLimit());
+		
+		if(mgurush.getPassword()!=null)
+		gurush.setPassword(mgurush.getPassword());
+		
+		
+		if(mgurush.getUserName()!=null)
+		gurush.setUserName(mgurush.getUserName());
+		
+		
+		
+		mgurushDao.update(gurush);
 	}else {
 		throw new EotException("Mgurush Does not exits");
 	}

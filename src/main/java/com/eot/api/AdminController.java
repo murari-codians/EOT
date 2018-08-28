@@ -35,19 +35,7 @@ public class AdminController {
 
 		}
 	}
-//	/*Api to login superadmin*/
-//	@RequestMapping(value = "/api/admin/login",method = RequestMethod.PUT)
-//	public ResponseEntity<Object> loginAdmin(@RequestBody SuperAdmin admin) {
-//
-//		try {
-//			superAdminService.adminLogin(admin);
-//			return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.SUPERADMIN_LOGIN_SUCESS);
-//		} catch (EotException e) {
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-//		}
-//
-//	}
+
 	/*Api to delete superadmin*/
 	@RequestMapping(value = "/api/admin/delete/{userId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteAdmin(@PathVariable("userId") String userId){
