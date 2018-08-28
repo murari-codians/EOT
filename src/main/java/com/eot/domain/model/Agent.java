@@ -24,7 +24,7 @@ public class Agent {
 	@GeneratedValue
 	private Long id;
 	
-	
+	@Column(unique = true)
 	private String userId;
 	
 	private String userName;

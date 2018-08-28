@@ -33,10 +33,10 @@ public class MgurushController {
 		try {
 			SuperAdmin admin = superAdminService.findAdminByUserId(userId);
 			if (admin != null) {
-				
+
 				if (admin.isActive() && admin.isAccountEnabled()) {
 					mgurushService.saveOrUpadte(mGurush);
-					
+
 					return ResponseEntity.status(HttpStatus.OK).body(mGurush);
 				} else {
 					throw new EotException("Super admin is disabled");
@@ -83,7 +83,7 @@ public class MgurushController {
 				if (admin.isActive() && admin.isAccountEnabled()) {
 					mGurush.setUserId(gurushId);
 					mgurushService.updateMgurush(mGurush);
-					
+
 					return ResponseEntity.status(HttpStatus.OK).body("Mgurush updated sucessfully");
 				} else {
 					throw new EotException("Super admin is disabled");

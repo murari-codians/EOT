@@ -7,4 +7,6 @@ public interface AgentService {
 	
 	public void saveOrUpdate(String userId, Agent agent) throws EotException;
 
+	public Agent findAgentByUserId(String userId) throws EotException;
+	
 }

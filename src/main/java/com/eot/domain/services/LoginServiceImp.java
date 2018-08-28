@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.eot.core.EOTConstant;
 import com.eot.core.LoginTypes;
+import com.eot.domain.dao.DistributerDao;
 import com.eot.domain.dao.LoginDao;
 import com.eot.domain.dao.MgurushDao;
 import com.eot.domain.dao.SuperAdminDao;
+import com.eot.domain.model.Distributer;
 import com.eot.domain.model.Login;
 import com.eot.domain.model.MGurush;
 import com.eot.domain.model.SuperAdmin;
@@ -27,6 +29,12 @@ public class LoginServiceImp implements LoginService {
 
 	@Autowired
 	LoginDao loginDao;
+	
+	@Autowired
+	DistributerService distributerService;
+	
+	@Autowired
+	DistributerDao distributerDao;
 
 	@Override
 	public void loginUser(Login loginUser) throws EotException {
@@ -60,6 +68,19 @@ public class LoginServiceImp implements LoginService {
 					throw new EotException("invalid User");
 				}
 
+			}else if(login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
+				if (login.getUserId().equals(loginUser.getUserId())
+						&& login.getPassword().equals(loginUser.getPassword())) {
+					Distributer distributer = distributerService.findDistributerByUserId(login.getUserId());
+					distributer.setActive(true);
+					distributer.setAccountEnabled(true);
+					distributerDao.saveOrUpdate(distributer);
+					
+					
+				} else {
+					throw new EotException("invalid User");
+				}
+
 			}
 		} else {
 			throw new EotException("Login User Doen not Exits");
@@ -70,6 +91,12 @@ public class LoginServiceImp implements LoginService {
 	public Login findLoginByUserId(String userId) throws EotException {
 		// TODO Auto-generated method stub
 		return  loginDao.findLoginByUserId(userId);
+	}
+
+	@Override
+	public void saveLogin(Login login) throws EotException {
+		 loginDao.saveLogin(login);
+		
 	}
 
 }

@@ -40,6 +40,8 @@ public class SuperAdminServiceImp implements SuperAdminService {
 			login.setPassword(admin.getPassword());
 			login.setUserType(admin.getUserType());
 			loginDao.saveLogin(login);
+			
+			admin.setUpdateDate(new Date());
 			admin.setCreatedDate(new Date());
 			adminDao.saveOrUpadte(admin);
 		} else {

@@ -14,16 +14,14 @@ import com.eot.domain.model.SuperAdmin;
 import com.eot.domain.services.SuperAdminService;
 import com.eot.util.EotException;
 
-
 @Controller
 public class AdminController {
 
-	
 	@Autowired
 	SuperAdminService superAdminService;
-	
-	/*Api to create superadmin*/
-	@RequestMapping(value = "/api/admin",method = RequestMethod.POST)
+
+	/* Api to create superadmin */
+	@RequestMapping(value = "/api/admin", method = RequestMethod.POST)
 	public ResponseEntity<Object> saveSuperAdmin(@RequestBody SuperAdmin admin) {
 		try {
 
@@ -36,21 +34,19 @@ public class AdminController {
 		}
 	}
 
-	/*Api to delete superadmin*/
+	/* Api to delete superadmin */
 	@RequestMapping(value = "/api/admin/delete/{userId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteAdmin(@PathVariable("userId") String userId){
-		
+	public ResponseEntity<Object> deleteAdmin(@PathVariable("userId") String userId) {
+
 		try {
-			
+
 			superAdminService.deleteAdmin(userId);
-			
+
 			return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.SUPERADMIN_DELETE_SUCCESSFULLY);
-		}catch(EotException e) {
+		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
 		}
-		
-		
+
 	}
-	
-	
+
 }

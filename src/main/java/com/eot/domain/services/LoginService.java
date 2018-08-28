@@ -9,4 +9,6 @@ public void loginUser(Login login) throws EotException;
 
 public Login findLoginByUserId(String userId) throws EotException;
 
+public void saveLogin(Login login) throws EotException;
+
 }

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eot.domain.dao.DistributerDao;
+import com.eot.domain.dao.LoginDao;
 import com.eot.domain.model.Distributer;
+import com.eot.domain.model.Login;
 import com.eot.util.EotException;
 
 @Service
@@ -18,12 +20,27 @@ public class DistributerServiceImpl implements DistributerService {
 	@Autowired
 	DistributerDao distributerDao;
 
+	@Autowired
+	LoginDao loginDao;
+
 	@Override
 	public void saveOrUpdate(Distributer distributer) throws EotException {
 
-		distributer.setCreatedDate(new Date());
-		distributer.setUpdateDate(new Date());
-		distributerDao.saveOrUpdate(distributer);
+		Distributer distributerDetails = distributerDao.findDistributerByUserId(distributer.getUserId());
+		if (distributerDetails != null) {
+			throw new EotException("Distributer already exits");
+		} else {
+			Login login = new Login();
+			login.setUserId(distributer.getUserId());
+			login.setPassword(distributer.getPassword());
+			login.setUserType(distributer.getUserType());
+			loginDao.saveLogin(login);
+
+			distributer.setCreatedDate(new Date());
+			distributer.setUpdateDate(new Date());
+			distributerDao.saveOrUpdate(distributer);
+		}
+
 	}
 
 	@Override

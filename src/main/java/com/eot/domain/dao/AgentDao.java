@@ -6,4 +6,6 @@ public interface AgentDao {
 	
 	public void saveOrUpdate(Agent agent);
 
+	public Agent findAgentByUserId(String userId); 
+	
 }

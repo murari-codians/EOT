@@ -9,15 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.eot.core.EOTConstant;
-import com.eot.core.LoginTypes;
 import com.eot.domain.model.Agent;
-import com.eot.domain.model.Distributer;
-import com.eot.domain.model.Login;
-import com.eot.domain.model.MGurush;
 import com.eot.domain.services.AgentService;
-import com.eot.domain.services.LoginService;
-import com.eot.domain.services.MgurushService;
 import com.eot.util.EotException;
 
 @Controller

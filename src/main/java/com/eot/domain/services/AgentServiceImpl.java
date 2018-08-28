@@ -31,38 +31,43 @@ public class AgentServiceImpl implements AgentService {
 	public void saveOrUpdate(String userId, Agent agent) throws EotException {
 
 		Login login = loginSrvice.findLoginByUserId(userId);
-         if(login != null) {
-		if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
-			MGurush mgurush = mgurushService.findMgurushByUserId(userId);
-			if (mgurush != null) {
+		if (login != null) {
+			if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
+				MGurush mgurush = mgurushService.findMgurushByUserId(userId);
+				if (mgurush != null) {
 
-				if (mgurush.isActive() && mgurush.isAccountEnabled()) {
-					agent.setCreatedBy(userId);
-					agent.setCreatedDate(new Date());
-					agent.setUpdateDate(new Date());
-					agentDao.saveOrUpdate(agent);
+					if (mgurush.isActive() && mgurush.isAccountEnabled()) {
+						agent.setCreatedBy(userId);
+						agent.setCreatedDate(new Date());
+						agent.setUpdateDate(new Date());
+						agentDao.saveOrUpdate(agent);
+					} else {
+						throw new EotException("Mgurush is not active");
+					}
 				} else {
-					throw new EotException("Mgurush is not active");
+					throw new EotException("Mgurush does not exits");
 				}
-			} else {
-				throw new EotException("Mgurush does not exits");
+			} else if (login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
+				agent.setCreatedBy(userId);
+				agent.setCreatedDate(new Date());
+				agent.setUpdateDate(new Date());
+				agentDao.saveOrUpdate(agent);
+
+			} else if (login.getUserType() == LoginTypes.WHOLSELLER.getValue()) {
+				agent.setCreatedBy(userId);
+				agent.setCreatedDate(new Date());
+				agent.setUpdateDate(new Date());
+				agentDao.saveOrUpdate(agent);
 			}
-		} else if (login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
-			agent.setCreatedBy(userId);
-			agent.setCreatedDate(new Date());
-			agent.setUpdateDate(new Date());
-			agentDao.saveOrUpdate(agent);
 
-		} else if (login.getUserType() == LoginTypes.WHOLSELLER.getValue()) {
-			agent.setCreatedBy(userId);
-			agent.setCreatedDate(new Date());
-			agent.setUpdateDate(new Date());
-			agentDao.saveOrUpdate(agent);
+		} else {
+			throw new EotException("user not logined");
 		}
-
-	}else {
-		throw new EotException("user not logined");
 	}
+
+	@Override
+	public Agent findAgentByUserId(String userId) throws EotException {
+		return agentDao.findAgentByUserId(userId);
 	}
 
 }

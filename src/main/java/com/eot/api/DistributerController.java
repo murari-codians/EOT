@@ -17,38 +17,39 @@ import com.eot.util.EotException;
 
 @Controller
 public class DistributerController {
-	
+
 	@Autowired
 	MgurushService mgurushService;
-	
+
 	@Autowired
 	DistributerService distributerService;
-	
-	@RequestMapping(value = "api/distributer/{userId}",method = RequestMethod.POST)
-	public ResponseEntity<Object> addDistributer(@PathVariable("userId") String userId, @RequestBody Distributer distributer){
-		
+
+	@RequestMapping(value = "api/distributer/{userId}", method = RequestMethod.POST)
+	public ResponseEntity<Object> addDistributer(@PathVariable("userId") String userId,
+			@RequestBody Distributer distributer) {
+
 		try {
 			MGurush mgurush = mgurushService.findMgurushByUserId(userId);
-			if(mgurush != null) {
-				if(mgurush.isActive() && mgurush.isAccountEnabled()) {
-					
+			if (mgurush != null) {
+				if (mgurush.isActive() && mgurush.isAccountEnabled()) {
+
 					distributer.setMgurusgId(userId);
 					distributerService.saveOrUpdate(distributer);
-					
+
 					return ResponseEntity.status(HttpStatus.OK).body(distributer);
 
-				}else {
+				} else {
 					throw new EotException("Mgurush is not yet login ");
 				}
-				
-			}else {
+
+			} else {
 				throw new EotException("Mgurush does not exits");
 			}
-		}catch(EotException e) {
+		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 
 		}
-		
+
 	}
 
 }

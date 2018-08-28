@@ -20,6 +20,8 @@ public class WholesellerServiceImpl implements WholesellerService {
 
 	@Override
 	public void saveOrUpdate(Wholeseller wholeseller) throws EotException {
+		
+		
 		wholeseller.setCreatedDate(new Date());
 		wholeseller.setUpdateDate(new Date());
 		wholesellerDao.saveOrUpdate(wholeseller);
