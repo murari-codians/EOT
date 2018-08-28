@@ -13,19 +13,22 @@ import com.eot.util.EotException;
 
 @Service
 @Transactional
-public class DistributerServiceImpl  implements DistributerService{
+public class DistributerServiceImpl implements DistributerService {
 
 	@Autowired
 	DistributerDao distributerDao;
-	
-	
-	
+
 	@Override
 	public void saveOrUpdate(Distributer distributer) throws EotException {
-		
+
 		distributer.setCreatedDate(new Date());
 		distributer.setUpdateDate(new Date());
 		distributerDao.saveOrUpdate(distributer);
+	}
+
+	@Override
+	public Distributer findDistributerByUserId(String userId) throws EotException {
+		return distributerDao.findDistributerByUserId(userId);
 	}
 
 }

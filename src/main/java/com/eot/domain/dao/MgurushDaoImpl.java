@@ -16,29 +16,28 @@ public class MgurushDaoImpl implements MgurushDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	
+
 	@Override
 	public void saveOrUpdate(MGurush mGurush) {
 		sessionFactory.getCurrentSession().saveOrUpdate(mGurush);
-		
+
 	}
 
 	@Override
 	public void update(MGurush mGurush) {
 		sessionFactory.getCurrentSession().merge(mGurush);
-		
+
 	}
+
 	@Override
 	public void deleteMgurush(String userId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MGurush.class);
-		List<MGurush> gurushList = (List<MGurush>)criteria.list();
-		for(MGurush gurush:gurushList)
-		{
-			if(gurush.getUserId().equals(userId))
+		List<MGurush> gurushList = (List<MGurush>) criteria.list();
+		for (MGurush gurush : gurushList) {
+			if (gurush.getUserId().equals(userId))
 				sessionFactory.getCurrentSession().delete(gurush);
 		}
-		
+
 	}
 
 	@Override
@@ -58,5 +57,4 @@ public class MgurushDaoImpl implements MgurushDao {
 		return c.list();
 	}
 
-	
 }
