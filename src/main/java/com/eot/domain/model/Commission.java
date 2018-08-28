@@ -2,8 +2,11 @@ package com.eot.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,6 +35,11 @@ public class Commission {
 	@Column(name = "commission_percentage")
 	private Double commission;
 
+	/*@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "distributer_id", nullable = false)
+	private Distributer distributer;*/
+
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -71,5 +79,15 @@ public class Commission {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	/*public Distributer getDistributer() {
+		return distributer;
+	}
+
+	public void setDistributer(Distributer distributer) {
+		this.distributer = distributer;
+	}*/
+	
+	
 
 }

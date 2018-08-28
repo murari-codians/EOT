@@ -1,63 +1,62 @@
 package com.eot.domain.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Mgurush")
-public class MGurush {
-	
+@Table(name = "distributer")
+public class Distributer {
+
+	public Distributer() {
+		super();
+	}
+
 	@Id
 	@GeneratedValue
+	@Column(name = "distributer_id", unique = true, nullable = false)
 	private Long id;
-	
+
 	private String userName;
-	
 
 	@Column(unique = true)
 	private String userId;
-	
+
 	private String password;
-	
+
 	private boolean isActive;
-	
+
 	private Long userType;
-	
+
 	private Date createdDate;
 
-	private boolean accountEnabled = false ;
+	private boolean accountEnabled = false;
 
 	private Date updateDate;
+
+	private String MgurusgId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private TransactionLimit transactionLimit;
-	
-	
-	
-	public TransactionLimit getTransactionLimit() {
-		return transactionLimit;
-	}
 
-	public void setTransactionLimit(TransactionLimit transactionLimit) {
-		this.transactionLimit = transactionLimit;
-	}
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Commission> commissions = new ArrayList<Commission>();
+	
+	/*@OneToMany(mappedBy="distributer")
+	public Set<Commission> commissions;*/
 
-	public Long getUserType() {
-		return userType;
-	}
-
-	public void setUserType(Long userType) {
-		this.userType = userType;
-	}
 
 	public Long getId() {
 		return id;
@@ -99,6 +98,14 @@ public class MGurush {
 		this.isActive = isActive;
 	}
 
+	public Long getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Long userType) {
+		this.userType = userType;
+	}
+
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -122,7 +129,31 @@ public class MGurush {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	
+
+	public TransactionLimit getTransactionLimit() {
+		return transactionLimit;
+	}
+
+	public void setTransactionLimit(TransactionLimit transactionLimit) {
+		this.transactionLimit = transactionLimit;
+	}
+
+	public List<Commission> getCommissions() {
+		return commissions;
+	}
+
+	public void setCommissions(List<Commission> commissions) {
+		this.commissions = commissions;
+	}
+
+	public String getMgurusgId() {
+		return MgurusgId;
+	}
+
+	public void setMgurusgId(String mgurusgId) {
+		MgurusgId = mgurusgId;
+	}
 
 	
+
 }

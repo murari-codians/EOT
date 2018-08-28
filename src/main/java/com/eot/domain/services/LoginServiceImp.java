@@ -54,6 +54,8 @@ public class LoginServiceImp implements LoginService {
 					gurush.setActive(true);
 					gurush.setAccountEnabled(true);
 					mgurushDao.saveOrUpdate(gurush);
+					
+					
 				} else {
 					throw new EotException("invalid User");
 				}
