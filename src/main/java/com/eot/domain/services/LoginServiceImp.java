@@ -5,15 +5,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eot.core.EOTConstant;
 import com.eot.core.LoginTypes;
 import com.eot.domain.dao.DistributerDao;
 import com.eot.domain.dao.LoginDao;
-import com.eot.domain.dao.MgurushDao;
+import com.eot.domain.dao.EntitiDao;
 import com.eot.domain.dao.SuperAdminDao;
 import com.eot.domain.model.Distributer;
+import com.eot.domain.model.Entiti;
 import com.eot.domain.model.Login;
-import com.eot.domain.model.MGurush;
 import com.eot.domain.model.SuperAdmin;
 import com.eot.util.EotException;
 
@@ -22,7 +21,7 @@ import com.eot.util.EotException;
 public class LoginServiceImp implements LoginService {
 
 	@Autowired
-	MgurushDao mgurushDao;
+	EntitiDao mgurushDao;
 
 	@Autowired
 	SuperAdminDao adminDao;
@@ -58,10 +57,10 @@ public class LoginServiceImp implements LoginService {
 			else if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
 				if (login.getUserId().equals(loginUser.getUserId())
 						&& login.getPassword().equals(loginUser.getPassword())) {
-					MGurush gurush = mgurushDao.findMgurushByUserId(login.getUserId());
-					gurush.setActive(true);
-					gurush.setAccountEnabled(true);
-					mgurushDao.saveOrUpdate(gurush);
+					Entiti entiti = mgurushDao.findMgurushByUserId(login.getUserId());
+					entiti.setActive(true);
+					entiti.setAccountEnabled(true);
+					mgurushDao.saveOrUpdate(entiti);
 					
 					
 				} else {

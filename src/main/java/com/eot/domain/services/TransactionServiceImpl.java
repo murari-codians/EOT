@@ -24,6 +24,7 @@ public class TransactionServiceImpl  implements TransactionService{
 	@Override
 	public void deposite(Transaction transaction) {
 		
+		Long commissionDeduction = transaction.getTransactionAmount()*(1/10);
 		
 		
 		transaction.setStatus(1000);

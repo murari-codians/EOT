@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eot.domain.model.Distributer;
-import com.eot.domain.model.MGurush;
+import com.eot.domain.model.Entiti;
 import com.eot.domain.services.DistributerService;
-import com.eot.domain.services.MgurushService;
+import com.eot.domain.services.EntitiService;
 import com.eot.util.EotException;
 
 @Controller
 public class DistributerController {
 
 	@Autowired
-	MgurushService mgurushService;
+	EntitiService mgurushService;
 
 	@Autowired
 	DistributerService distributerService;
@@ -29,9 +29,9 @@ public class DistributerController {
 			@RequestBody Distributer distributer) {
 
 		try {
-			MGurush mgurush = mgurushService.findMgurushByUserId(userId);
-			if (mgurush != null) {
-				if (mgurush.isActive() && mgurush.isAccountEnabled()) {
+			Entiti entiti = mgurushService.findMgurushByUserId(userId);
+			if (entiti != null) {
+				if (entiti.isActive() && entiti.isAccountEnabled()) {
 
 					distributer.setMgurusgId(userId);
 					distributerService.saveOrUpdate(distributer);

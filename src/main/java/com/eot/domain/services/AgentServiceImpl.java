@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.eot.core.LoginTypes;
 import com.eot.domain.dao.AgentDao;
 import com.eot.domain.model.Agent;
+import com.eot.domain.model.Entiti;
 import com.eot.domain.model.Login;
-import com.eot.domain.model.MGurush;
 import com.eot.util.EotException;
 
 @Service
@@ -22,7 +22,7 @@ public class AgentServiceImpl implements AgentService {
 	AgentDao agentDao;
 
 	@Autowired
-	MgurushService mgurushService;
+	EntitiService mgurushService;
 
 	@Autowired
 	LoginService loginSrvice;
@@ -31,12 +31,13 @@ public class AgentServiceImpl implements AgentService {
 	public void saveOrUpdate(String userId, Agent agent) throws EotException {
 
 		Login login = loginSrvice.findLoginByUserId(userId);
+		
 		if (login != null) {
 			if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
-				MGurush mgurush = mgurushService.findMgurushByUserId(userId);
-				if (mgurush != null) {
+				Entiti entiti = mgurushService.findMgurushByUserId(userId);
+				if (entiti != null) {
 
-					if (mgurush.isActive() && mgurush.isAccountEnabled()) {
+					if (entiti.isActive() && entiti.isAccountEnabled()) {
 						agent.setCreatedBy(userId);
 						agent.setCreatedDate(new Date());
 						agent.setUpdateDate(new Date());
