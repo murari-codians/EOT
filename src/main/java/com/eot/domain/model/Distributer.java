@@ -46,7 +46,7 @@ public class Distributer {
 
 	private Date updateDate;
 
-	private String MgurusgId;
+	private String entityId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private TransactionLimit transactionLimit;
@@ -146,12 +146,12 @@ public class Distributer {
 		this.commissions = commissions;
 	}
 
-	public String getMgurusgId() {
-		return MgurusgId;
+	public String getEntitiId() {
+		return entityId;
 	}
 
-	public void setMgurusgId(String mgurusgId) {
-		MgurusgId = mgurusgId;
+	public void setEntitiId(String mgurusgId) {
+		entityId = mgurusgId;
 	}
 
 	

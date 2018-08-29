@@ -18,15 +18,15 @@ public class CommissionAmount {
 
 	private String agentId;
 
-	private String entityCommission;
+	private Double entityCommission;
 
-	private String distributerCommission;
+	private Double distributerCommission;
 
-	private String wholesellerCommission;
+	private Double wholesellerCommission;
 
-	private String retailerCommission;
+	private Double retailerCommission;
 
-	private String agentCommission;
+	private Double agentCommission;
 
 	public Long getId() {
 		return id;
@@ -44,43 +44,43 @@ public class CommissionAmount {
 		this.agentId = agentId;
 	}
 
-	public String getEntityCommission() {
+	public Double getEntityCommission() {
 		return entityCommission;
 	}
 
-	public void setEntityCommission(String entityCommission) {
+	public void setEntityCommission(Double entityCommission) {
 		this.entityCommission = entityCommission;
 	}
 
-	public String getDistributerCommission() {
+	public Double getDistributerCommission() {
 		return distributerCommission;
 	}
 
-	public void setDistributerCommission(String distributerCommission) {
+	public void setDistributerCommission(Double distributerCommission) {
 		this.distributerCommission = distributerCommission;
 	}
 
-	public String getWholesellerCommission() {
+	public Double getWholesellerCommission() {
 		return wholesellerCommission;
 	}
 
-	public void setWholesellerCommission(String wholesellerCommission) {
+	public void setWholesellerCommission(Double wholesellerCommission) {
 		this.wholesellerCommission = wholesellerCommission;
 	}
 
-	public String getRetailerCommission() {
+	public Double getRetailerCommission() {
 		return retailerCommission;
 	}
 
-	public void setRetailerCommission(String retailerCommission) {
+	public void setRetailerCommission(Double retailerCommission) {
 		this.retailerCommission = retailerCommission;
 	}
 
-	public String getAgentCommission() {
+	public Double getAgentCommission() {
 		return agentCommission;
 	}
 
-	public void setAgentCommission(String agentCommission) {
+	public void setAgentCommission(Double agentCommission) {
 		this.agentCommission = agentCommission;
 	}
 

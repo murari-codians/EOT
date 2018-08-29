@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eot.core.LoginTypes;
 import com.eot.core.TransactionTypes;
+import com.eot.domain.dao.LoginDao;
 import com.eot.domain.model.Agent;
 import com.eot.domain.model.Transaction;
 import com.eot.domain.services.AgentService;
@@ -28,26 +29,16 @@ public class TransactionController {
 	@Autowired
 	AgentService agentService;
 
+
 	@RequestMapping(value = "/api/deposite/{agentId}", method = RequestMethod.POST)
 	public ResponseEntity<Object> deposite(@PathVariable("agentId") String agentId,
 			@RequestBody Transaction transaction) {
 
 		try {
-			Agent agent = agentService.findAgentByUserId(agentId);
 
-			if (agent != null) {
+			transactionService.deposite(agentId, transaction);
+			return ResponseEntity.status(HttpStatus.OK).body(transaction);
 
-				if (agent.getUserType() == LoginTypes.AGENT.getValue()) {
-
-					transaction.setAgentId(agentId);
-					transactionService.deposite(transaction);
-					return ResponseEntity.status(HttpStatus.OK).body(transaction);
-				} else {
-					throw new EotException("not authorized");
-				}
-			} else {
-				throw new EotException("Agent not found");
-			}
 		}
 
 		catch (EotException e) {

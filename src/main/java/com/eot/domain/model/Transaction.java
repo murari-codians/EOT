@@ -24,7 +24,7 @@ public class Transaction {
 
 	private Date transactionDate;
 
-	private Long transactionAmount;
+	private Double transactionAmount;
 
 	private Long serviceCharge;
 
@@ -68,11 +68,11 @@ public class Transaction {
 		this.transactionDate = transactionDate;
 	}
 
-	public Long getTransactionAmount() {
+	public Double getTransactionAmount() {
 		return transactionAmount;
 	}
 
-	public void setTransactionAmount(Long transactionAmount) {
+	public void setTransactionAmount(Double transactionAmount) {
 		this.transactionAmount = transactionAmount;
 	}
 

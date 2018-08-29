@@ -33,7 +33,7 @@ public class DistributerController {
 			if (entiti != null) {
 				if (entiti.isActive() && entiti.isAccountEnabled()) {
 
-					distributer.setMgurusgId(userId);
+					distributer.setEntitiId(userId);
 					distributerService.saveOrUpdate(distributer);
 
 					return ResponseEntity.status(HttpStatus.OK).body(distributer);

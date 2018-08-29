@@ -43,6 +43,8 @@ public class Agent {
 	
 	private String createdBy;
 	
+	private boolean isActive;
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Commission> commissions = new ArrayList<Commission>();
 
@@ -133,6 +135,14 @@ public class Agent {
 
 	public void setCommissions(List<Commission> commissions) {
 		this.commissions = commissions;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 	
