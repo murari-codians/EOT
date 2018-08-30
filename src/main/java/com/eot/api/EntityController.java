@@ -39,7 +39,7 @@ public class EntityController {
 
 					return ResponseEntity.status(HttpStatus.OK).body(mGurush);
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException(EOTConstant.SUPERADMIN_DISABLED);
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -61,9 +61,9 @@ public class EntityController {
 			if (admin != null) {
 				if (admin.isActive() && admin.isAccountEnabled()) {
 					mgurushService.deleteMgurush(entityId);
-					return ResponseEntity.status(HttpStatus.OK).body("Mgurush deleted sucessfully");
+					return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.ENTITY_DELETED_SUCCESSFULLY);
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException(EOTConstant.SUPERADMIN_DISABLED);
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -84,9 +84,9 @@ public class EntityController {
 					mGurush.setUserId(entityId);
 					mgurushService.updateMgurush(mGurush);
 
-					return ResponseEntity.status(HttpStatus.OK).body("Mgurush updated sucessfully");
+					return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.ENTITY_UPDATED_SUCCESSFULLY);
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException(EOTConstant.SUPERADMIN_DISABLED);
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -105,7 +105,7 @@ public class EntityController {
 					List<Entiti> gurush = mgurushService.findAll();
 					return ResponseEntity.status(HttpStatus.OK).body(gurush);
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException(EOTConstant.SUPERADMIN_DISABLED);
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);

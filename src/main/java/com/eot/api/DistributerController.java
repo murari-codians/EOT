@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eot.core.EOTConstant;
 import com.eot.domain.model.Distributer;
 import com.eot.domain.model.Entiti;
 import com.eot.domain.services.DistributerService;
@@ -39,11 +40,11 @@ public class DistributerController {
 					return ResponseEntity.status(HttpStatus.OK).body(distributer);
 
 				} else {
-					throw new EotException("Mgurush is not yet login ");
+					throw new EotException(EOTConstant.ENTITY_HAS_NOT_LOGIN);
 				}
 
 			} else {
-				throw new EotException("Mgurush does not exits");
+				throw new EotException(EOTConstant.ENTITY_DOESNOT_EXISTS);
 			}
 		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

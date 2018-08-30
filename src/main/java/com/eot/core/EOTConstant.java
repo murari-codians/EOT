@@ -22,8 +22,20 @@ public interface EOTConstant {
 	
 	public static Integer LOGINMAXATTEMPTS = new Integer(3);
 	
-	public static String MGURUSH_ALREADY_EXISTS = "mgurush already exits";
+	public static String MGURUSH_ALREADY_EXISTS = "entity already exits";
 	
-	public static String MGURUSH_UPDATED_SUCESSFULLY = "mgurush updated sucessfully";
+	public static String MGURUSH_UPDATED_SUCESSFULLY = "entity updated sucessfully";
+
+	public static String ENTITY_HAS_NOT_LOGIN = "entity has not yet logeed in";
+
+	public static String ENTITY_DOESNOT_EXISTS = "entity doesn't exists";
+
+	public static String SUPERADMIN_DISABLED = "superadmin is disabled";
+
+	public static Object ENTITY_DELETED_SUCCESSFULLY = "entity deleted successfully";
+
+	public static Object ENTITY_UPDATED_SUCCESSFULLY = "entity updated successfully";
+
+	public static Object LOGIN_SUCCESSFULLY = "login successfully";
 
 }

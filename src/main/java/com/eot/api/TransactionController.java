@@ -29,7 +29,6 @@ public class TransactionController {
 	@Autowired
 	AgentService agentService;
 
-
 	@RequestMapping(value = "/api/transaction/{agentId}", method = RequestMethod.POST)
 	public ResponseEntity<Object> deposite(@PathVariable("agentId") String agentId,
 			@RequestBody Transaction transaction) {
