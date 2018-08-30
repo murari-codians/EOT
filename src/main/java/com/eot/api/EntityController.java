@@ -40,6 +40,7 @@ public class EntityController {
 					return ResponseEntity.status(HttpStatus.OK).body(entiti);
 				} else {
 					throw new EotException("Superadmin is not logined");
+
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -62,8 +63,10 @@ public class EntityController {
 				if (admin.isActive() && admin.isAccountEnabled()) {
 					entitiService.deleteEntiti(entityId);
 					return ResponseEntity.status(HttpStatus.OK).body("Entity deleted sucessfully");
+
 				} else {
 					throw new EotException("Superadmin is not logined");
+
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -85,8 +88,10 @@ public class EntityController {
 					entitiService.updateEntiti(entiti);
 
 					return ResponseEntity.status(HttpStatus.OK).body("Entity updated sucessfully");
+
 				} else {
 					throw new EotException("Superadmin is Not logined");
+
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -106,6 +111,7 @@ public class EntityController {
 					return ResponseEntity.status(HttpStatus.OK).body(gurush);
 				} else {
 					throw new EotException("Superadmin is disabled");
+
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);

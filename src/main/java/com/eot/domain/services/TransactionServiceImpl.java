@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eot.core.EOTConstant;
 import com.eot.core.LoginTypes;
 import com.eot.core.TransactionIdGenerator;
 import com.eot.domain.dao.AgentDao;
@@ -67,6 +68,7 @@ public class TransactionServiceImpl implements TransactionService {
 	SuperAdminDao adminDao;
 
 
+	@SuppressWarnings("unused")
 	@Override
 	public void deposite(String agentId, Transaction transaction) throws EotException {
 
@@ -142,10 +144,10 @@ public class TransactionServiceImpl implements TransactionService {
 							totalCommission = totalCommission - entityCommission;
 							commissionAmount = addEntitCommission(entityCommission, commissionAmount);
 						} else {
-							throw new EotException("unable to process transaction");
+							throw new EotException(EOTConstant.UNABLE_TO_PROCESS_TRANSACTION);
 						}
 					} else {
-						throw new EotException("unable to process");
+						throw new EotException(EOTConstant.UNABLE_TO_PROCESS);
 					}
 
 					if (distributer != null) {
@@ -196,10 +198,10 @@ public class TransactionServiceImpl implements TransactionService {
 							totalCommission = totalCommission - entityCommission;
 							commissionAmount = addEntitCommission(entityCommission, commissionAmount);
 						} else {
-							throw new EotException("unable to process transaction");
+							throw new EotException(EOTConstant.UNABLE_TO_PROCESS_TRANSACTION);
 						}
 					} else {
-						throw new EotException("unable to process");
+						throw new EotException(EOTConstant.UNABLE_TO_PROCESS);
 					}
 
 					if (distributer != null) {
@@ -269,10 +271,10 @@ public class TransactionServiceImpl implements TransactionService {
 							totalCommission = totalCommission - entityCommission;
 							commissionAmount = addEntitCommission(entityCommission, commissionAmount);
 						} else {
-							throw new EotException("unable to process transaction");
+							throw new EotException(EOTConstant.UNABLE_TO_PROCESS_TRANSACTION);
 						}
 					} else {
-						throw new EotException("unable to process");
+						throw new EotException(EOTConstant.UNABLE_TO_PROCESS);
 					}
 
 					if (distributer != null) {
@@ -333,10 +335,10 @@ public class TransactionServiceImpl implements TransactionService {
 				transaction.setTransactionID(transactionIdGenerator.transactionIdGenerator());
 				transactionDao.deposite(transaction);
 			} else {
-				throw new EotException("not authorized");
+				throw new EotException(EOTConstant.UNAUTHORIZED);
 			}
 		} else {
-			throw new EotException("Agent not found");
+			throw new EotException(EOTConstant.AGENT_NOT_FOUND);
 		}
 
 	}

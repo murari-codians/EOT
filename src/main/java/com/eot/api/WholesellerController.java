@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.eot.domain.model.Distributer;
 import com.eot.domain.model.Wholeseller;
-import com.eot.domain.services.DistributerService;
 import com.eot.domain.services.WholesellerService;
 import com.eot.util.EotException;
 
@@ -30,6 +28,7 @@ public class WholesellerController {
 			wholesellerService.saveOrUpdate(userId, wholeseller);
 
 			return ResponseEntity.status(HttpStatus.OK).body(wholeseller);
+
 		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 

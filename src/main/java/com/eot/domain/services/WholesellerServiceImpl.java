@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eot.domain.dao.DistributerDao;
+
 import com.eot.domain.dao.LoginDao;
 import com.eot.domain.dao.WholesellerDao;
 import com.eot.domain.model.Distributer;
@@ -44,6 +45,7 @@ public class WholesellerServiceImpl implements WholesellerService {
 					login.setPassword(wholeseller.getPassword());
 					login.setUserType(wholeseller.getUserType());
 					loginDao.saveLogin(login);
+
 
 					wholeseller.setDistributerId(distributer.getUserId());
 					wholeseller.setCreatedDate(new Date());

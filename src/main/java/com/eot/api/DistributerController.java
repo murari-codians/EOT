@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eot.core.EOTConstant;
 import com.eot.domain.model.Distributer;
 import com.eot.domain.model.Entiti;
 import com.eot.domain.services.DistributerService;
@@ -30,6 +31,7 @@ public class DistributerController {
 			distributerService.saveOrUpdate(userId, distributer);
 
 			return ResponseEntity.status(HttpStatus.OK).body(distributer);
+
 
 		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

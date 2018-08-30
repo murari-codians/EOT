@@ -58,6 +58,7 @@ public class DistributerServiceImpl implements DistributerService {
 			}
 		}else {
 			throw new EotException("Entity Does not exits");
+
 		}
 		
 	
