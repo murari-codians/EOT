@@ -76,4 +76,11 @@ public interface EOTConstant {
 	
 	public static String RETAILER_NOT_YET_LOGGED_IN = "wholeseller is not yet logged in";
 
+	public static String AGENT_DOESNOT_EXISTS = "agent doesn't exists";
+
+	public static String CUSTOMER_ALREADY_EXISTS = "customer already exists";
+
+	public static String CUSTOMER_DOESNOT_EXISTS = "customer doesn't exists";
+
+
 }

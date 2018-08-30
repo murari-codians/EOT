@@ -101,7 +101,7 @@ public class EntityController {
 		}
 	}
 
-	@RequestMapping(value = "/api/admin/{userId}/entity", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/admin/{userId}/entities", method = RequestMethod.GET)
 	public ResponseEntity<Object> getAll(@PathVariable("userId") String userId) {
 		try {
 			SuperAdmin admin = superAdminService.findAdminByUserId(userId);
