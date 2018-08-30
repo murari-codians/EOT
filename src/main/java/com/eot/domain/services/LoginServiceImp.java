@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eot.core.EOTConstant;
 import com.eot.core.LoginTypes;
 import com.eot.domain.dao.AgentDao;
 import com.eot.domain.dao.DistributerDao;
@@ -74,7 +75,7 @@ public class LoginServiceImp implements LoginService {
 					adminDao.saveOrUpadte(superadmin);
 
 				} else {
-					throw new EotException("invalid User");
+					throw new EotException(EOTConstant.INVALID_USER);
 				}
 			}
 
@@ -87,7 +88,7 @@ public class LoginServiceImp implements LoginService {
 					mgurushDao.saveOrUpdate(entiti);
 
 				} else {
-					throw new EotException("invalid User");
+					throw new EotException(EOTConstant.INVALID_USER);
 				}
 
 			} else if (login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
@@ -99,7 +100,7 @@ public class LoginServiceImp implements LoginService {
 					distributerDao.saveOrUpdate(distributer);
 
 				} else {
-					throw new EotException("invalid User");
+					throw new EotException(EOTConstant.INVALID_USER);
 				}
 
 			} else if (login.getUserType() == LoginTypes.WHOLSELLER.getValue()) {
@@ -111,7 +112,7 @@ public class LoginServiceImp implements LoginService {
 					wholesellerDao.saveOrUpdate(wholeseller);
 
 				} else {
-					throw new EotException("invalid User");
+					throw new EotException(EOTConstant.INVALID_USER);
 				}
 
 			} else if (login.getUserType() == LoginTypes.RETAILER.getValue()) {
@@ -123,7 +124,7 @@ public class LoginServiceImp implements LoginService {
 					retailerDao.saveOrUpdate(retailer);
 
 				} else {
-					throw new EotException("invalid User");
+					throw new EotException(EOTConstant.INVALID_USER);
 				}
 
 			}else if (login.getUserType() == LoginTypes.AGENT.getValue() || login.getUserType() == LoginTypes.SOLEMERCHANT.getValue() || login.getUserType() == LoginTypes.AGENTSOLEMERCHANT.getValue()) {
@@ -136,12 +137,12 @@ public class LoginServiceImp implements LoginService {
 					agentDao.saveOrUpdate(agent);
 
 				} else {
-					throw new EotException("invalid User");
+					throw new EotException(EOTConstant.INVALID_USER);
 				}
 
 			}
 		} else {
-			throw new EotException("Login User Doen not Exits");
+			throw new EotException(EOTConstant.LOGGED_IN_USER_DOESNT_EXISTS);
 		}
 	}
 

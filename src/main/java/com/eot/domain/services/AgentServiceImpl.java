@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eot.core.EOTConstant;
 import com.eot.core.LoginTypes;
 import com.eot.domain.dao.AgentDao;
 import com.eot.domain.dao.DistributerDao;
@@ -63,7 +64,7 @@ public class AgentServiceImpl implements AgentService {
 					if (entiti.isActive() && entiti.isAccountEnabled()) {
 						Agent agentDetails = agentDao.findAgentByUserId(agent.getUserId());
 						if (agentDetails != null) {
-							throw new EotException("Agent already exits");
+							throw new EotException(EOTConstant.AGENT_ALREADY_EXISTS);
 						} else {
 							Login agentLogin = new Login();
 							agentLogin.setUserId(agent.getUserId());
@@ -77,10 +78,10 @@ public class AgentServiceImpl implements AgentService {
 						}
 
 					} else {
-						throw new EotException("Entity is not active");
+						throw new EotException(EOTConstant.ENTITY_INACTIVE);
 					}
 				} else {
-					throw new EotException("Entity does not exits");
+					throw new EotException(EOTConstant.ENTITY_DOESNT_EXISTS);
 				}
 			} else if (login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
 				Distributer distributer = distributerDao.findDistributerByUserId(userId);
@@ -88,7 +89,7 @@ public class AgentServiceImpl implements AgentService {
 					if (distributer.isActive() && distributer.isAccountEnabled()) {
 						Agent agentDetails = agentDao.findAgentByUserId(agent.getUserId());
 						if (agentDetails != null) {
-							throw new EotException("Agent already exits");
+							throw new EotException(EOTConstant.AGENT_ALREADY_EXISTS);
 						} else {
 							Login agentLogin = new Login();
 							agentLogin.setUserId(agent.getUserId());
@@ -103,7 +104,7 @@ public class AgentServiceImpl implements AgentService {
 
 					}
 				} else {
-					throw new EotException("Distributer does not exits");
+					throw new EotException(EOTConstant.DISTRIBUTER_DOESNT_EXISTS);
 				}
 
 			} else if (login.getUserType() == LoginTypes.WHOLSELLER.getValue()) {
@@ -112,7 +113,7 @@ public class AgentServiceImpl implements AgentService {
 					if (wholeseller.isActive() && wholeseller.isAccountEnabled()) {
 						Agent agentDetails = agentDao.findAgentByUserId(agent.getUserId());
 						if (agentDetails != null) {
-							throw new EotException("Agent already exits");
+							throw new EotException(EOTConstant.AGENT_ALREADY_EXISTS);
 						} else {
 							Login agentLogin = new Login();
 							agentLogin.setUserId(agent.getUserId());
@@ -127,7 +128,7 @@ public class AgentServiceImpl implements AgentService {
 
 					}
 				} else {
-					throw new EotException("Wholeseller does not exits");
+					throw new EotException(EOTConstant.WHOLESELLER_DOESNT_EXISTS);
 				}
 
 			} else if (login.getUserType() == LoginTypes.RETAILER.getValue()) {
@@ -136,7 +137,7 @@ public class AgentServiceImpl implements AgentService {
 					if (retailer.isActive() && retailer.isAccountEnabled()) {
 						Agent agentDetails = agentDao.findAgentByUserId(agent.getUserId());
 						if (agentDetails != null) {
-							throw new EotException("Agent already exits");
+							throw new EotException(EOTConstant.AGENT_ALREADY_EXISTS);
 						} else {
 							Login agentLogin = new Login();
 							agentLogin.setUserId(agent.getUserId());
@@ -152,13 +153,13 @@ public class AgentServiceImpl implements AgentService {
 
 					}
 				} else {
-					throw new EotException("Retailer does not exits");
+					throw new EotException(EOTConstant.RETAILER_DOESNT_EXISTS);
 				}
 
 			}
 
 		} else {
-			throw new EotException("user not logined");
+			throw new EotException(EOTConstant.USER_NOT_LOGGED_IN);
 		}
 	}
 

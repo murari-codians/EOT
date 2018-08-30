@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eot.core.EOTConstant;
 import com.eot.domain.model.Retailer;
 import com.eot.domain.model.Wholeseller;
 import com.eot.domain.services.RetailerService;
@@ -38,11 +39,11 @@ public class RetailerController {
 					return ResponseEntity.status(HttpStatus.OK).body(retailer);
 
 				} else {
-					throw new EotException("Wholeseller is not yet login ");
+					throw new EotException(EOTConstant.WHOLESELLER_NOT_YET_LOGGED_IN);
 				}
 
 			} else {
-				throw new EotException("Wholeseller does not exits");
+				throw new EotException(EOTConstant.WHOLESELLER_DOESNT_EXISTS);
 			}
 		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

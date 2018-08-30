@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eot.core.EOTConstant;
 import com.eot.domain.dao.LoginDao;
 import com.eot.domain.dao.WholesellerDao;
 import com.eot.domain.model.Distributer;
@@ -28,7 +29,7 @@ public class WholesellerServiceImpl implements WholesellerService {
 	public void saveOrUpdate(Wholeseller wholeseller) throws EotException {
 		Wholeseller wholesellerDetails = wholesellerDao.findWholesellerByUserId(wholeseller.getUserId());
 		if (wholesellerDetails != null) {
-			throw new EotException("Wholeseller already exits");
+			throw new EotException(EOTConstant.WHOLESELLER_ALREADY_EXISTS);
 		} else {
 			Login login = new Login();
 			login.setUserId(wholeseller.getUserId());

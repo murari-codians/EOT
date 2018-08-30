@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eot.domain.dao.LoginDao;
+import com.eot.core.EOTConstant;
 import com.eot.domain.dao.EntitiDao;
 import com.eot.domain.model.Entiti;
 import com.eot.domain.model.Login;
@@ -30,7 +31,7 @@ public class EntitiServiceImpl  implements EntitiService{
 	public void saveOrUpadte(Entiti entiti) throws EotException {
 		Entiti entitiDetails = mgurushDao.findMgurushByUserId(entiti.getUserId());
 		if(entitiDetails!=null) {
-			throw new EotException("Mgurush already exits");
+			throw new EotException(EOTConstant.ENTITY_ALREADY_EXISTS);
 		}else {
 		Login login = new Login();
 		login.setUserId(entiti.getUserId());
@@ -52,7 +53,7 @@ public class EntitiServiceImpl  implements EntitiService{
 		mgurushDao.deleteMgurush(userId);
 		loginDao.deleteLogin(userId);
 		}else {
-			throw new EotException("Mgurush Does not exits");
+			throw new EotException(EOTConstant.ENTITY_DOESNOT_EXISTS);
 		}
 	}
 
@@ -87,7 +88,7 @@ public class EntitiServiceImpl  implements EntitiService{
 		mgurushDao.update(entitiDetails);
 		
 	}else {
-		throw new EotException("Mgurush Does not exits");
+		throw new EotException(EOTConstant.ENTITY_DOESNT_EXISTS);
 	}
 		
 	}
