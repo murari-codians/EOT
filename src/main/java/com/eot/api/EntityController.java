@@ -25,21 +25,21 @@ public class EntityController {
 	SuperAdminService superAdminService;
 
 	@Autowired
-	EntitiService mgurushService;
+	EntitiService entitiService;
 
 	@RequestMapping(value = "/api/Entity/{userId}", method = RequestMethod.POST)
-	public ResponseEntity<Object> gurushCreate(@PathVariable("userId") String userId, @RequestBody Entiti mGurush) {
+	public ResponseEntity<Object> createEntiti(@PathVariable("userId") String userId, @RequestBody Entiti entiti) {
 
 		try {
 			SuperAdmin admin = superAdminService.findAdminByUserId(userId);
 			if (admin != null) {
 
 				if (admin.isActive() && admin.isAccountEnabled()) {
-					mgurushService.saveOrUpadte(mGurush);
+					entitiService.saveOrUpadte(entiti);
 
-					return ResponseEntity.status(HttpStatus.OK).body(mGurush);
+					return ResponseEntity.status(HttpStatus.OK).body(entiti);
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException("Superadmin is not logined");
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -53,17 +53,17 @@ public class EntityController {
 	}
 
 	@RequestMapping(value = "/api/admin/{userId}/Entity/{entityId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteMgurush(@PathVariable("userId") String userId,
+	public ResponseEntity<Object> deleteEntiti(@PathVariable("userId") String userId,
 			@PathVariable("entityId") String entityId) {
 
 		try {
 			SuperAdmin admin = superAdminService.findAdminByUserId(userId);
 			if (admin != null) {
 				if (admin.isActive() && admin.isAccountEnabled()) {
-					mgurushService.deleteMgurush(entityId);
-					return ResponseEntity.status(HttpStatus.OK).body("Mgurush deleted sucessfully");
+					entitiService.deleteEntiti(entityId);
+					return ResponseEntity.status(HttpStatus.OK).body("Entity deleted sucessfully");
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException("Superadmin is not logined");
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -74,19 +74,19 @@ public class EntityController {
 	}
 
 	@RequestMapping(value = "/api/admin/{userId}/Entity/{entityId}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateMgurush(@PathVariable("userId") String userId,
-			@PathVariable("entityId") String entityId, @RequestBody Entiti mGurush) {
+	public ResponseEntity<Object> updateEntiti(@PathVariable("userId") String userId,
+			@PathVariable("entityId") String entityId, @RequestBody Entiti entiti) {
 
 		try {
 			SuperAdmin admin = superAdminService.findAdminByUserId(userId);
 			if (admin != null) {
 				if (admin.isActive() && admin.isAccountEnabled()) {
-					mGurush.setUserId(entityId);
-					mgurushService.updateMgurush(mGurush);
+					entiti.setUserId(entityId);
+					entitiService.updateEntiti(entiti);
 
-					return ResponseEntity.status(HttpStatus.OK).body("Mgurush updated sucessfully");
+					return ResponseEntity.status(HttpStatus.OK).body("Entity updated sucessfully");
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException("Superadmin is Not logined");
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
@@ -102,10 +102,10 @@ public class EntityController {
 			SuperAdmin admin = superAdminService.findAdminByUserId(userId);
 			if (admin != null) {
 				if (admin.isActive() && admin.isAccountEnabled()) {
-					List<Entiti> gurush = mgurushService.findAll();
+					List<Entiti> gurush = entitiService.findAll();
 					return ResponseEntity.status(HttpStatus.OK).body(gurush);
 				} else {
-					throw new EotException("Super admin is disabled");
+					throw new EotException("Superadmin is disabled");
 				}
 			} else {
 				throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);

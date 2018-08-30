@@ -50,7 +50,7 @@ public class CommissionController {
 				commissionService.saveOrUpadte(commission);
 				return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.COMMISSION_UPDATED_SUCCESSFULLY);
 			} else {
-				throw new EotException("comission ");
+				throw new EotException("comission does not exits ");
 			}
 		} catch (EotException e) {
 			e.printStackTrace();

@@ -9,9 +9,9 @@ public interface EntitiDao {
 	
 	public void saveOrUpdate(Entiti entiti);
 	
-	public void deleteMgurush(String userId);
+	public void deleteEntiti(String userId);
 		
-	public Entiti findMgurushByUserId(String userId);
+	public Entiti findEntitiByUserId(String userId);
 	
 	public List<Entiti> findAll();
 

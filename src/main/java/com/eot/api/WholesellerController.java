@@ -21,30 +21,15 @@ public class WholesellerController {
 	@Autowired
 	WholesellerService wholesellerService;
 
-	@Autowired
-	DistributerService distributerService;
-
 	@RequestMapping(value = "/api/wholeseller/{userId}", method = RequestMethod.POST)
 	public ResponseEntity<Object> addWholeseller(@PathVariable("userId") String userId,
 			@RequestBody Wholeseller wholeseller) {
 
 		try {
-			Distributer distributer = distributerService.findDistributerByUserId(userId);
-			if (distributer != null) {
-				if (distributer.isActive() && distributer.isAccountEnabled()) {
 
-					wholeseller.setDistributerId(userId);
-					wholesellerService.saveOrUpdate(wholeseller);
+			wholesellerService.saveOrUpdate(userId, wholeseller);
 
-					return ResponseEntity.status(HttpStatus.OK).body(wholeseller);
-
-				} else {
-					throw new EotException("Distributer is not yet login ");
-				}
-
-			} else {
-				throw new EotException("Distributer does not exits");
-			}
+			return ResponseEntity.status(HttpStatus.OK).body(wholeseller);
 		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 

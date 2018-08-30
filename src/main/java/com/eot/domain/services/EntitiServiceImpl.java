@@ -19,18 +19,18 @@ import com.eot.util.EotException;
 public class EntitiServiceImpl  implements EntitiService{
 
 	@Autowired
-	 EntitiDao mgurushDao;
+	 EntitiDao entitiDao;
 	
-	@Autowired
-	LoginDao loginDao;
+	 @Autowired
+	 LoginDao loginDao;
 	
 	
 	
 	@Override
 	public void saveOrUpadte(Entiti entiti) throws EotException {
-		Entiti entitiDetails = mgurushDao.findMgurushByUserId(entiti.getUserId());
+		Entiti entitiDetails = entitiDao.findEntitiByUserId(entiti.getUserId());
 		if(entitiDetails!=null) {
-			throw new EotException("Mgurush already exits");
+			throw new EotException("Entity already exits");
 		}else {
 		Login login = new Login();
 		login.setUserId(entiti.getUserId());
@@ -40,51 +40,59 @@ public class EntitiServiceImpl  implements EntitiService{
 		
 		entiti.setCreatedDate(new Date());
 		entiti.setUpdateDate(new Date());
-		mgurushDao.saveOrUpdate(entiti);
+		entitiDao.saveOrUpdate(entiti);
 		}
 	}
 
 	@Override
-	public void deleteMgurush(String userId) throws EotException {
+	public void deleteEntiti(String userId) throws EotException {
 		
-		Entiti entiti = mgurushDao.findMgurushByUserId(userId);
+		Entiti entiti = entitiDao.findEntitiByUserId(userId);
 		if(entiti != null) {
-		mgurushDao.deleteMgurush(userId);
+		entitiDao.deleteEntiti(userId);
 		loginDao.deleteLogin(userId);
 		}else {
-			throw new EotException("Mgurush Does not exits");
+			throw new EotException("Entity Does not exits");
 		}
 	}
 
 	@Override
-	public void updateMgurush(Entiti entiti) throws EotException {
+	public void updateEntiti(Entiti entiti) throws EotException {
 		
-		Entiti entitiDetails = mgurushDao.findMgurushByUserId(entiti.getUserId());
+		Entiti entitiDetails = entitiDao.findEntitiByUserId(entiti.getUserId());
+		
 		if(entitiDetails!=null) {
+			
         Login login = loginDao.findLoginByUserId(entitiDetails.getUserId());
+        
 		if(entiti.getUserType()!=null)
 		login.setUserType(entiti.getUserType());
+		
 		if(entiti.getPassword()!=null) 
 		login.setPassword(entiti.getPassword());
+		
 		loginDao.saveLogin(login);
 		
 		entitiDetails.setId(entitiDetails.getId());
 		entitiDetails.getTransactionLimit().setId(entitiDetails.getTransactionLimit().getId());
+		
 		entitiDetails.setUpdateDate(new Date());
 		
 		if(entiti.getTransactionLimit()!=null)
 		entitiDetails.setTransactionLimit(entiti.getTransactionLimit());
 		
 		if(entiti.getPassword()!=null)
-			entitiDetails.setPassword(entiti.getPassword());
+		entitiDetails.setPassword(entiti.getPassword());
 		
 		
 		if(entiti.getUserName()!=null)
-			entitiDetails.setUserName(entiti.getUserName());
+		entitiDetails.setUserName(entiti.getUserName());
 		
+		if(entiti.getServiceChargeSplit()!=null || entiti.getServiceChargeSplit().size()>0)
+			
+		entitiDetails.setServiceChargeSplit(entiti.getServiceChargeSplit());
 		
-		
-		mgurushDao.update(entitiDetails);
+		entitiDao.update(entitiDetails);
 		
 	}else {
 		throw new EotException("Mgurush Does not exits");
@@ -93,15 +101,15 @@ public class EntitiServiceImpl  implements EntitiService{
 	}
 
 	@Override
-	public Entiti findMgurushByUserId(String userId)
+	public Entiti findEntitiByUserId(String userId)
 	{
-		return mgurushDao.findMgurushByUserId(userId);
+		return entitiDao.findEntitiByUserId(userId);
 		
 	}
 	@Override
 	public List<Entiti> findAll() {
 		
-		return mgurushDao.findAll();
+		return entitiDao.findAll();
 	}
 
 	

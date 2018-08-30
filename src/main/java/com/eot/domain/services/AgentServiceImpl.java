@@ -57,7 +57,7 @@ public class AgentServiceImpl implements AgentService {
 
 		if (login != null) {
 			if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
-				Entiti entiti = mgurushService.findMgurushByUserId(userId);
+				Entiti entiti = mgurushService.findEntitiByUserId(userId);
 				if (entiti != null) {
 
 					if (entiti.isActive() && entiti.isAccountEnabled()) {

@@ -87,7 +87,7 @@ public class TransactionServiceImpl implements TransactionService {
          
 				if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
 
-					Entiti entiti = mgurushDao.findMgurushByUserId(login.getUserId());
+					Entiti entiti = mgurushDao.findEntitiByUserId(login.getUserId());
 
 					
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())
@@ -118,7 +118,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 					Distributer distributer = distributerDao.findDistributerByUserId(login.getUserId());
 
-					Entiti entiti = mgurushDao.findMgurushByUserId(distributer.getEntitiId());
+					Entiti entiti = mgurushDao.findEntitiByUserId(distributer.getEntitiId());
 					
 
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())
@@ -171,7 +171,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 					Distributer distributer = distributerDao.findDistributerByUserId(login.getUserId());
 
-					Entiti entiti = mgurushDao.findMgurushByUserId(distributer.getEntitiId());
+					Entiti entiti = mgurushDao.findEntitiByUserId(distributer.getEntitiId());
 					
 
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())
@@ -244,7 +244,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 					Distributer distributer = distributerDao.findDistributerByUserId(wholeseller.getDistributerId());
 
-					Entiti entiti = mgurushDao.findMgurushByUserId(distributer.getEntitiId());
+					Entiti entiti = mgurushDao.findEntitiByUserId(distributer.getEntitiId());
 					
 
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())

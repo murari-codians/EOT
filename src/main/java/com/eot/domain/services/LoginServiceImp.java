@@ -81,7 +81,7 @@ public class LoginServiceImp implements LoginService {
 			else if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
 				if (login.getUserId().equals(loginUser.getUserId())
 						&& login.getPassword().equals(loginUser.getPassword())) {
-					Entiti entiti = mgurushDao.findMgurushByUserId(login.getUserId());
+					Entiti entiti = mgurushDao.findEntitiByUserId(login.getUserId());
 					entiti.setActive(true);
 					entiti.setAccountEnabled(true);
 					mgurushDao.saveOrUpdate(entiti);

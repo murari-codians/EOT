@@ -28,7 +28,7 @@ public class EntitiDaoImpl implements EntitiDao {
 	}
 
 	@Override
-	public void deleteMgurush(String userId) {
+	public void deleteEntiti(String userId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Entiti.class);
 		List<Entiti> entitiDetails = (List<Entiti>) criteria.list();
 		for (Entiti entiti : entitiDetails) {
@@ -39,7 +39,7 @@ public class EntitiDaoImpl implements EntitiDao {
 	}
 
 	@Override
-	public Entiti findMgurushByUserId(String userId) {
+	public Entiti findEntitiByUserId(String userId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Entiti.class);
 		List<Entiti> entitiDetails = (List<Entiti>) criteria.list();
 		for (Entiti entiti : entitiDetails) {
