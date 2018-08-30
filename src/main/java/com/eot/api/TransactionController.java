@@ -30,7 +30,7 @@ public class TransactionController {
 	AgentService agentService;
 
 
-	@RequestMapping(value = "/api/deposite/{agentId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/transaction/{agentId}", method = RequestMethod.POST)
 	public ResponseEntity<Object> deposite(@PathVariable("agentId") String agentId,
 			@RequestBody Transaction transaction) {
 

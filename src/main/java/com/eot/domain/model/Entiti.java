@@ -1,7 +1,8 @@
 package com.eot.domain.model;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,34 +16,34 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "entiti")
 public class Entiti {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String userName;
-	
 
 	@Column(unique = true)
 	private String userId;
-	
+
 	private String password;
-	
+
 	private boolean isActive;
-	
+
 	private Long userType;
-	
+
 	private Date createdDate;
 
-	private boolean accountEnabled = false ;
+	private boolean accountEnabled = false;
 
 	private Date updateDate;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private TransactionLimit transactionLimit;
-	
-	
-	
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<ServiceChargeSplit> serviceChargeSplit = new ArrayList<>();
+
 	public TransactionLimit getTransactionLimit() {
 		return transactionLimit;
 	}
@@ -122,7 +123,13 @@ public class Entiti {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	
 
-	
+	public List<ServiceChargeSplit> getServiceChargeSplit() {
+		return serviceChargeSplit;
+	}
+
+	public void setServiceChargeSplit(List<ServiceChargeSplit> serviceChargeSplit) {
+		this.serviceChargeSplit = serviceChargeSplit;
+	}
+
 }

@@ -1,11 +1,15 @@
 package com.eot.domain.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -45,6 +49,9 @@ public class SuperAdmin {
 
    
     private Date updateDate;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private  List<ServiceCharge> serviceCharge = new ArrayList<>();
 
 	public String getUserId() {
 		return userId;
@@ -132,6 +139,14 @@ public class SuperAdmin {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public List<ServiceCharge> getServiceCharge() {
+		return serviceCharge;
+	}
+
+	public void setServiceCharge(List<ServiceCharge> serviceCharge) {
+		this.serviceCharge = serviceCharge;
 	}
 	
 

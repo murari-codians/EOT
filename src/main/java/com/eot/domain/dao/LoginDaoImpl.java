@@ -46,4 +46,11 @@ public class LoginDaoImpl implements LoginDao {
 		
 	}
 
+	@Override
+	public List<Login> findAll() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Login.class);
+		List<Login> loginList = (List<Login>) criteria.list();
+		return loginList;
+	}
+
 }
