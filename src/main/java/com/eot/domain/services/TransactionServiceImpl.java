@@ -94,7 +94,7 @@ public class TransactionServiceImpl implements TransactionService {
 					
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())
 					{
-						if(transaction.getTransactionType() == serviceChargeSplit.getTransactionType()) {
+						if(transaction.getTransactionType().equals(serviceChargeSplit.getTransactionType())) {
 							   serviceCharge = customerAmount * (1 / serviceChargeSplit.getServiceChargePercentage());
 							   
 							   
@@ -125,7 +125,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())
 					{
-						if(transaction.getTransactionType() == serviceChargeSplit.getTransactionType()) {
+						if(transaction.getTransactionType().equals(serviceChargeSplit.getTransactionType())) {
 							   serviceCharge = customerAmount * (1 / serviceChargeSplit.getServiceChargePercentage());
 							   ServiceCharge serviceChargeDetails = new ServiceCharge(); 
 							   serviceChargeDetails.setEntityId(entiti.getUserId());
@@ -171,14 +171,14 @@ public class TransactionServiceImpl implements TransactionService {
 
 					Wholeseller wholeseller = wholesellerDao.findWholesellerByUserId(login.getUserId());
 
-					Distributer distributer = distributerDao.findDistributerByUserId(login.getUserId());
+					Distributer distributer = distributerDao.findDistributerByUserId(wholeseller.getDistributerId());
 
 					Entiti entiti = mgurushDao.findEntitiByUserId(distributer.getEntitiId());
 					
 
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())
 					{
-						if(transaction.getTransactionType() == serviceChargeSplit.getTransactionType()) {
+						if(transaction.getTransactionType().equals( serviceChargeSplit.getTransactionType())) {
 							   serviceCharge = customerAmount * (1 / serviceChargeSplit.getServiceChargePercentage());
 							   ServiceCharge serviceChargeDetails = new ServiceCharge(); 
 							   serviceChargeDetails.setEntityId(entiti.getUserId());
@@ -251,7 +251,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 					for(ServiceChargeSplit serviceChargeSplit : entiti.getServiceChargeSplit())
 					{
-						if(transaction.getTransactionType() == serviceChargeSplit.getTransactionType()) {
+						if(transaction.getTransactionType().equals(serviceChargeSplit.getTransactionType())) {
 							   serviceCharge = customerAmount * (1 / serviceChargeSplit.getServiceChargePercentage());
 							   ServiceCharge serviceChargeDetails = new ServiceCharge(); 
 							   serviceChargeDetails.setEntityId(entiti.getUserId());

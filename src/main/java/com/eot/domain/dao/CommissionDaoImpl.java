@@ -25,36 +25,48 @@ public class CommissionDaoImpl implements CommissionDao {
 		getSession().saveOrUpdate(commission);
 	}
 
-	@Override
-	public void deleteCommission(String userId) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Commission.class);
-		@SuppressWarnings("unchecked")
-		List<Commission> commissions = (List<Commission>) criteria.list();
-		for (Commission comm : commissions) {
-			if (comm.getUserId().equals(userId))
-				sessionFactory.getCurrentSession().delete(comm);
-		}
+//	@Override
+//	public void deleteCommission(String userId) {
+//		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Commission.class);
+//		@SuppressWarnings("unchecked")
+//		List<Commission> commissions = (List<Commission>) criteria.list();
+//		for (Commission comm : commissions) {
+//			if (comm.getUserId().equals(userId))
+//				sessionFactory.getCurrentSession().delete(comm);
+//		}
+//
+//	}
 
-	}
-
-	@Override
-	public Commission findCommissionByUserId(String userId) {
-		Criteria criteria = getSession().createCriteria(Commission.class);
-		@SuppressWarnings("unchecked")
-		List<Commission> commissions = (List<Commission>) criteria.list();
-		for (Commission comm : commissions) {
-			if (comm.getUserId().equals(userId))
-				return comm;
-		}
-		return null;
-	}
-
+/*//	@Override
+//	public Commission findCommissionByUserId(String userId) {
+//		Criteria criteria = getSession().createCriteria(Commission.class);
+//		@SuppressWarnings("unchecked")
+//		List<Commission> commissions = (List<Commission>) criteria.list();
+//		for (Commission comm : commissions) {
+//			if (comm.getUserId().equals(userId))
+//				return comm;
+//		}
+//		return null;
+//	}
+*/
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Commission> getListCommission() {
 		Criteria criteria = getSession().createCriteria(Commission.class);
 		
 			return (List<Commission>) criteria.list();
+	}
+
+	@Override
+	public void deleteCommission(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Commission findCommissionByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

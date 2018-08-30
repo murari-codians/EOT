@@ -26,7 +26,7 @@ public class Transaction {
 
 	private Double transactionAmount;
 
-	private Long serviceCharge;
+//	private Long serviceCharge;
 
 	private Integer status;
 
@@ -34,7 +34,7 @@ public class Transaction {
 
 	private Integer cusType;
 
-	private String agentId;
+//	private String agentId;
 
 	public Long getId() {
 		return id;
@@ -76,13 +76,13 @@ public class Transaction {
 		this.transactionAmount = transactionAmount;
 	}
 
-	public Long getServiceCharge() {
-		return serviceCharge;
-	}
-
-	public void setServiceCharge(Long serviceCharge) {
-		this.serviceCharge = serviceCharge;
-	}
+//	public Long getServiceCharge() {
+//		return serviceCharge;
+//	}
+//
+//	public void setServiceCharge(Long serviceCharge) {
+//		this.serviceCharge = serviceCharge;
+//	}
 
 	public Integer getStatus() {
 		return status;
@@ -108,12 +108,12 @@ public class Transaction {
 		this.cusType = cusType;
 	}
 
-	public String getAgentId() {
-		return agentId;
-	}
-
-	public void setAgentId(String agentId) {
-		this.agentId = agentId;
-	}
+//	public String getAgentId() {
+//		return agentId;
+//	}
+//
+//	public void setAgentId(String agentId) {
+//		this.agentId = agentId;
+//	}
 
 }

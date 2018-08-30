@@ -73,5 +73,7 @@ public interface EOTConstant {
 	public static String UNAUTHORIZED = "not authorized";
 
 	public static String AGENT_NOT_FOUND = "agent not found";
+	
+	public static String RETAILER_NOT_YET_LOGGED_IN = "wholeseller is not yet logged in";
 
 }

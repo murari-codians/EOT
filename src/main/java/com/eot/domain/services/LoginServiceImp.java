@@ -44,7 +44,7 @@ public class LoginServiceImp implements LoginService {
 
 	@Autowired
 	RetailerService retailerService;
-	
+
 	@Autowired
 	AgentService agentService;
 
@@ -56,7 +56,7 @@ public class LoginServiceImp implements LoginService {
 
 	@Autowired
 	RetailerDao retailerDao;
-	
+
 	@Autowired
 	AgentDao agentDao;
 
@@ -66,6 +66,7 @@ public class LoginServiceImp implements LoginService {
 		Login login = loginDao.findLoginByUserId(loginUser.getUserId());
 
 		if (login != null) {
+			
 			if (login.getUserType() == LoginTypes.SUPERADMIN.getValue()) {
 				if (login.getUserId().equals(loginUser.getUserId())
 						&& login.getPassword().equals(loginUser.getPassword())) {
@@ -77,73 +78,77 @@ public class LoginServiceImp implements LoginService {
 				} else {
 					throw new EotException(EOTConstant.INVALID_USER);
 				}
+			} 
+		
+
+		else if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
+			if (login.getUserId().equals(loginUser.getUserId())
+					&& login.getPassword().equals(loginUser.getPassword())) {
+				Entiti entiti = mgurushDao.findEntitiByUserId(login.getUserId());
+				entiti.setActive(true);
+				entiti.setAccountEnabled(true);
+				mgurushDao.saveOrUpdate(entiti);
+
+			} else {
+				throw new EotException(EOTConstant.INVALID_USER);
 			}
 
-			else if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
-				if (login.getUserId().equals(loginUser.getUserId())
-						&& login.getPassword().equals(loginUser.getPassword())) {
-					Entiti entiti = mgurushDao.findEntitiByUserId(login.getUserId());
-					entiti.setActive(true);
-					entiti.setAccountEnabled(true);
-					mgurushDao.saveOrUpdate(entiti);
+		} else if (login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
+			if (login.getUserId().equals(loginUser.getUserId())
+					&& login.getPassword().equals(loginUser.getPassword())) {
+				Distributer distributer = distributerService.findDistributerByUserId(login.getUserId());
+				distributer.setActive(true);
+				distributer.setAccountEnabled(true);
+				distributerDao.saveOrUpdate(distributer);
 
-				} else {
-					throw new EotException(EOTConstant.INVALID_USER);
-				}
-
-			} else if (login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
-				if (login.getUserId().equals(loginUser.getUserId())
-						&& login.getPassword().equals(loginUser.getPassword())) {
-					Distributer distributer = distributerService.findDistributerByUserId(login.getUserId());
-					distributer.setActive(true);
-					distributer.setAccountEnabled(true);
-					distributerDao.saveOrUpdate(distributer);
-
-				} else {
-					throw new EotException(EOTConstant.INVALID_USER);
-				}
-
-			} else if (login.getUserType() == LoginTypes.WHOLSELLER.getValue()) {
-				if (login.getUserId().equals(loginUser.getUserId())
-						&& login.getPassword().equals(loginUser.getPassword())) {
-					Wholeseller wholeseller = wholesellerService.findWholesellerByUserId(login.getUserId());
-					wholeseller.setActive(true);
-					wholeseller.setAccountEnabled(true);
-					wholesellerDao.saveOrUpdate(wholeseller);
-
-				} else {
-					throw new EotException(EOTConstant.INVALID_USER);
-				}
-
-			} else if (login.getUserType() == LoginTypes.RETAILER.getValue()) {
-				if (login.getUserId().equals(loginUser.getUserId())
-						&& login.getPassword().equals(loginUser.getPassword())) {
-					Retailer retailer = retailerService.findRetailerByUserId(login.getUserId());
-					retailer.setActive(true);
-					retailer.setAccountEnabled(true);
-					retailerDao.saveOrUpdate(retailer);
-
-				} else {
-					throw new EotException(EOTConstant.INVALID_USER);
-				}
-
-			}else if (login.getUserType() == LoginTypes.AGENT.getValue() || login.getUserType() == LoginTypes.SOLEMERCHANT.getValue() || login.getUserType() == LoginTypes.AGENTSOLEMERCHANT.getValue()) {
-			
-				if (login.getUserId().equals(loginUser.getUserId())
-						&& login.getPassword().equals(loginUser.getPassword())) {
-					Agent agent = agentService.findAgentByUserId(login.getUserId());
-					agent.setActive(true);
-					agent.setAccountEnabled(true);
-					agentDao.saveOrUpdate(agent);
-
-				} else {
-					throw new EotException(EOTConstant.INVALID_USER);
-				}
-
+			} else {
+				throw new EotException(EOTConstant.INVALID_USER);
 			}
-		} else {
-			throw new EotException(EOTConstant.LOGGED_IN_USER_DOESNT_EXISTS);
+
+		} else if (login.getUserType() == LoginTypes.WHOLSELLER.getValue()) {
+			if (login.getUserId().equals(loginUser.getUserId())
+					&& login.getPassword().equals(loginUser.getPassword())) {
+				Wholeseller wholeseller = wholesellerService.findWholesellerByUserId(login.getUserId());
+				wholeseller.setActive(true);
+				wholeseller.setAccountEnabled(true);
+				wholesellerDao.saveOrUpdate(wholeseller);
+
+			} else {
+				throw new EotException(EOTConstant.INVALID_USER);
+			}
+
+		} else if (login.getUserType() == LoginTypes.RETAILER.getValue()) {
+			if (login.getUserId().equals(loginUser.getUserId())
+					&& login.getPassword().equals(loginUser.getPassword())) {
+				Retailer retailer = retailerService.findRetailerByUserId(login.getUserId());
+				retailer.setActive(true);
+				retailer.setAccountEnabled(true);
+				retailerDao.saveOrUpdate(retailer);
+
+			} else {
+				throw new EotException(EOTConstant.INVALID_USER);
+			}
+
+		} else if (login.getUserType() == LoginTypes.AGENT.getValue()
+				|| login.getUserType() == LoginTypes.SOLEMERCHANT.getValue()
+				|| login.getUserType() == LoginTypes.AGENTSOLEMERCHANT.getValue()) {
+
+			if (login.getUserId().equals(loginUser.getUserId())
+					&& login.getPassword().equals(loginUser.getPassword())) {
+				Agent agent = agentService.findAgentByUserId(login.getUserId());
+				agent.setActive(true);
+				agent.setAccountEnabled(true);
+				agentDao.saveOrUpdate(agent);
+
+			} else {
+				throw new EotException(EOTConstant.INVALID_USER);
+			}
+
 		}
+	}
+		else{
+		throw new EotException(EOTConstant.LOGGED_IN_USER_DOESNT_EXISTS);
+	}
 	}
 
 	@Override

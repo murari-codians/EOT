@@ -102,6 +102,8 @@ public class AgentServiceImpl implements AgentService {
 							agentDao.saveOrUpdate(agent);
 						}
 
+					}else {
+						throw new EotException(EOTConstant.DISTRIBUTER_NOT_YET_LOGGED_IN);
 					}
 				} else {
 					throw new EotException(EOTConstant.DISTRIBUTER_DOESNT_EXISTS);
@@ -126,6 +128,8 @@ public class AgentServiceImpl implements AgentService {
 							agentDao.saveOrUpdate(agent);
 						}
 
+					}else {
+						throw new EotException(EOTConstant.WHOLESELLER_NOT_YET_LOGGED_IN);
 					}
 				} else {
 					throw new EotException(EOTConstant.WHOLESELLER_DOESNT_EXISTS);
@@ -151,6 +155,8 @@ public class AgentServiceImpl implements AgentService {
 							agentDao.saveOrUpdate(agent);
 						}
 
+					}else {
+						throw new EotException(EOTConstant.RETAILER_NOT_YET_LOGGED_IN);
 					}
 				} else {
 					throw new EotException(EOTConstant.RETAILER_DOESNT_EXISTS);

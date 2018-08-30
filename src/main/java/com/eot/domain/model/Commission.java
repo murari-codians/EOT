@@ -26,8 +26,6 @@ public class Commission {
 	@GeneratedValue
 	private Long id;
 
-	private String userId;
-
 	private Double minAmount;
 
 	private Double maxAmount;
@@ -35,18 +33,20 @@ public class Commission {
 	@Column(name = "commission_percentage")
 	private Double commission;
 
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "distributer_id", nullable = false)
-	private Distributer distributer;*/
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "distributer_id", nullable = false) private Distributer
+	 * distributer;
+	 */
 
-	
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+//	public String getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
 
 	public Double getMinAmount() {
 		return minAmount;
@@ -80,14 +80,11 @@ public class Commission {
 		this.id = id;
 	}
 
-	/*public Distributer getDistributer() {
-		return distributer;
-	}
-
-	public void setDistributer(Distributer distributer) {
-		this.distributer = distributer;
-	}*/
-	
-	
+	/*
+	 * public Distributer getDistributer() { return distributer; }
+	 * 
+	 * public void setDistributer(Distributer distributer) { this.distributer =
+	 * distributer; }
+	 */
 
 }

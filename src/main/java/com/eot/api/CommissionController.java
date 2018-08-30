@@ -37,27 +37,27 @@ public class CommissionController {
 		}
 	}
 
-	/* Api to update commission */
-	@RequestMapping(value = "api/update/{userId}", method = RequestMethod.PUT)
-	public @ResponseBody ResponseEntity<Object> updateCommission(@PathVariable("userId") String userId,
-			@RequestBody Commission commission) {
-
-		try {
-			Commission comm = commissionService.findCommissionByUserId(userId);
-			if (comm != null) {
-				commission.setId(comm.getId());
-				commission.setUserId(comm.getUserId());
-				commissionService.saveOrUpadte(commission);
-				return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.COMMISSION_UPDATED_SUCCESSFULLY);
-			} else {
-				throw new EotException("comission does not exits ");
-			}
-		} catch (EotException e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
-		}
-
-	}
+//	/* Api to update commission */
+//	@RequestMapping(value = "api/update/{userId}", method = RequestMethod.PUT)
+//	public @ResponseBody ResponseEntity<Object> updateCommission(@PathVariable("userId") String userId,
+//			@RequestBody Commission commission) {
+//
+//		try {
+//			Commission comm = commissionService.findCommissionByUserId(userId);
+//			if (comm != null) {
+//				commission.setId(comm.getId());
+//				commission.setUserId(comm.getUserId());
+//				commissionService.saveOrUpadte(commission);
+//				return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.COMMISSION_UPDATED_SUCCESSFULLY);
+//			} else {
+//				throw new EotException("comission does not exits ");
+//			}
+//		} catch (EotException e) {
+//			e.printStackTrace();
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
+//		}
+//
+//	}
 
 	/* Api to delete commission */
 	@RequestMapping(value = "/api/delete/{userId}", method = RequestMethod.DELETE)
