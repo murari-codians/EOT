@@ -384,13 +384,21 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<Transaction> miniStatement(String agentId, Transaction transaction) throws EotException {
+		
+		Agent agent = agentDao.findAgentByUserId(agentId);
 		Customer customer = customerDao.findCustomerByAccountNo(transaction.getAccountNumber());
-		if(customer != null) {
-			List<Transaction> list = transactionDao.miniStatements(transaction);
-			return list;
+		if(agent != null) {
+			if(customer != null) {
+				List<Transaction> list = transactionDao.miniStatements(transaction);
+				
+				return list;
+			}else {
+				throw new EotException(EOTConstant.CUSTOMER_DOESNOT_EXISTS);
+			}
 		}else {
-			throw new EotException(EOTConstant.CUSTOMER_DOESNOT_EXISTS);
+			throw new EotException(EOTConstant.AGENT_NOT_FOUND);
 		}
+		
 		
 	}
 
