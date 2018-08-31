@@ -382,4 +382,14 @@ public class TransactionServiceImpl implements TransactionService {
 
 	}
 
+	@Override
+	public void miniStatement(String agentId, Transaction transaction) throws EotException {
+		Customer customer = customerDao.findCustomerByAccountNo(transaction.getAccountNumber());
+		if(customer != null) {
+			transactionDao.miniStatements(transaction);
+		}else {
+			throw new EotException(EOTConstant.CUSTOMER_DOESNOT_EXISTS);
+		}
+	}
+
 }

@@ -45,5 +45,22 @@ public class TransactionController {
 		}
 
 	}
+	
+	@RequestMapping(value = "/api/miniStatement/{agentId}", method = RequestMethod.POST)
+	public ResponseEntity<Object> miniStatement(@PathVariable("agentId") String agentId,
+			@RequestBody Transaction transaction) {
+
+		try {
+
+			transactionService.miniStatement(agentId, transaction);
+			return ResponseEntity.status(HttpStatus.OK).body(transaction);
+
+		}
+
+		catch (EotException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
+		}
+
+	}
 
 }

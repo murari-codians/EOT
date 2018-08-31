@@ -6,5 +6,7 @@ import com.eot.util.EotException;
 public interface TransactionService {
 	
 	public void deposite(String agentId,Transaction transaction) throws EotException;
+	
+	public void miniStatement(String agentId,Transaction transaction) throws EotException;
 
 }

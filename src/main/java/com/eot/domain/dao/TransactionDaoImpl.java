@@ -1,5 +1,9 @@
 package com.eot.domain.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,18 @@ public class TransactionDaoImpl implements TransactionDao {
 	public void deposite(Transaction transaction) {
 		getSession().save(transaction);
 		
+	}
+
+	@Override
+	public List<Object> miniStatements(Transaction transaction) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Transaction.class);
+		List<Transaction> transactionDetails = (List<Transaction>) criteria.list();
+		List<Object> list = new ArrayList<>();
+		for (Transaction transact : transactionDetails) {
+			if (transact.getAccountNumber().equals(transaction.getAccountNumber()))
+				list.add(transact);
+		}
+		return list;	
 	}
 
 }
