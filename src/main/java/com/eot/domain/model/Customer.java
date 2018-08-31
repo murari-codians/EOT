@@ -1,6 +1,6 @@
 package com.eot.domain.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +33,10 @@ public class Customer {
 	private String emailId;
 
 	private Date transactionDate;
+	
+	private Date CreatedDate;
 
-	private Double accountBalance;
+	private Double accountBalance= 0.0;
 
 	public Long getId() {
 		return id;
@@ -107,5 +109,14 @@ public class Customer {
 	public void setAccountBalance(Double accountBalance) {
 		this.accountBalance = accountBalance;
 	}
+
+	public Date getCreatedDate() {
+		return CreatedDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		CreatedDate = createdDate;
+	}
+	
 
 }

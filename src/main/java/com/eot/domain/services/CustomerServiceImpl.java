@@ -1,5 +1,6 @@
 package com.eot.domain.services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -21,12 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void saveOrUpadte(Customer customer) throws EotException {
-		Customer customerDetails = customerDao.findCustomerByUserId(customer.getCustomerId());
+		Customer customerDetails = customerDao.findCustomerByAccountNo(customer.getAccountNumber());
 		if (customerDetails != null) {
 
 			throw new EotException(EOTConstant.CUSTOMER_ALREADY_EXISTS);
 		} else {
-
+			customer.setCreatedDate(new Date());
 			customerDao.saveOrUpdate(customer);
 		}
 

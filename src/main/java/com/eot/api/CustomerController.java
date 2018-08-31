@@ -36,6 +36,7 @@ public class CustomerController {
 			if (agent != null) {
 
 				if (agent.isActive() && agent.isAccountEnabled()) {
+					customer.setAgentId(agent.getUserId());
 					customerService.saveOrUpadte(customer);
 
 					return ResponseEntity.status(HttpStatus.OK).body(customer);

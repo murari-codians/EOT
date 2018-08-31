@@ -337,11 +337,11 @@ public class TransactionServiceImpl implements TransactionService {
 					commissionAmount.setAgentCommission(totalCommission);
 					commissionAmountDao.addCommissionAmount(commissionAmount);
 					
-					
+					customer.setCustomerId(customer.getCustomerId());
 					customer.setAccountBalance(customer.getAccountBalance()+customerAmount);
 					
 					transaction.setAgentId(agentId);
-					transaction.setStatus(1000);
+					transaction.setStatus(EOTConstant.TRANSACTION_STATUS_SUCESS);
 					transaction.setTransactionDate(new Date());
 					transaction.setTransactionID(transactionIdGenerator.transactionIdGenerator());
 					transactionDao.deposite(transaction);

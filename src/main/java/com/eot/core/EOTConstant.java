@@ -81,6 +81,8 @@ public interface EOTConstant {
 	public static String CUSTOMER_ALREADY_EXISTS = "customer already exists";
 
 	public static String CUSTOMER_DOESNOT_EXISTS = "customer doesn't exists";
+	
+	public static Integer TRANSACTION_STATUS_SUCESS = 100;
 
 
 }
