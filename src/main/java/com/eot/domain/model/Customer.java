@@ -2,6 +2,7 @@ package com.eot.domain.model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ public class Customer {
 
 	private String agentId;
 
+	@Column(unique = true)
 	private String accountNumber;
 
 	private String mobileNumber;

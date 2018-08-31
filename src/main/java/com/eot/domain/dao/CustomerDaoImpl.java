@@ -55,4 +55,15 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	}
 
+	@Override
+	public Customer findCustomerByAccountNo(String accNo) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Customer.class);
+		List<Customer> customerDetails = (List<Customer>) criteria.list();
+		for (Customer customer : customerDetails) {
+			if (customer.getAccountNumber().equals(accNo))
+				return customer;
+		}
+		return null;
+	}
+
 }
