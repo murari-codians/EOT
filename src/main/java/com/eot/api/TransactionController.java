@@ -1,5 +1,7 @@
 package com.eot.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,8 +54,8 @@ public class TransactionController {
 
 		try {
 
-			transactionService.miniStatement(agentId, transaction);
-			return ResponseEntity.status(HttpStatus.OK).body(transaction);
+		List<Transaction> list = transactionService.miniStatement(agentId, transaction);
+			return ResponseEntity.status(HttpStatus.OK).body(list);
 
 		}
 

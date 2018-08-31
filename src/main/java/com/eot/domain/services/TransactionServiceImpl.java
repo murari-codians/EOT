@@ -1,6 +1,7 @@
 package com.eot.domain.services;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -342,7 +343,6 @@ public class TransactionServiceImpl implements TransactionService {
 					
 					transaction.setAgentId(agentId);
 					transaction.setStatus(EOTConstant.TRANSACTION_STATUS_SUCESS);
-					transaction.setTransactionDate(new Date());
 					transaction.setTransactionID(transactionIdGenerator.transactionIdGenerator());
 					transactionDao.deposite(transaction);
 				}else {
@@ -383,13 +383,15 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public void miniStatement(String agentId, Transaction transaction) throws EotException {
+	public List<Transaction> miniStatement(String agentId, Transaction transaction) throws EotException {
 		Customer customer = customerDao.findCustomerByAccountNo(transaction.getAccountNumber());
 		if(customer != null) {
-			transactionDao.miniStatements(transaction);
+			List<Transaction> list = transactionDao.miniStatements(transaction);
+			return list;
 		}else {
 			throw new EotException(EOTConstant.CUSTOMER_DOESNOT_EXISTS);
 		}
+		
 	}
 
 }

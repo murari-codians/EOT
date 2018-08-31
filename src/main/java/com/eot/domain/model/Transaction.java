@@ -22,18 +22,14 @@ public class Transaction {
 
 	private Integer transactionType;
 
-	private Date transactionDate;
-
 	private Double transactionAmount;
-
 
 	private Integer status;
 
 	private String accountNumber;
 
+	private String agentId;
 
-    private String agentId;
-    
 	public Long getId() {
 		return id;
 	}
@@ -56,14 +52,6 @@ public class Transaction {
 
 	public void setTransactionType(Integer transactionType) {
 		this.transactionType = transactionType;
-	}
-
-	public Date getTransactionDate() {
-		return transactionDate;
-	}
-
-	public void setTransactionDate(Date transactionDate) {
-		this.transactionDate = transactionDate;
 	}
 
 	public Double getTransactionAmount() {
@@ -97,6 +85,5 @@ public class Transaction {
 	public void setAgentId(String agentId) {
 		this.agentId = agentId;
 	}
-
 
 }

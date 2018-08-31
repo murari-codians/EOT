@@ -28,10 +28,10 @@ public class TransactionDaoImpl implements TransactionDao {
 	}
 
 	@Override
-	public List<Object> miniStatements(Transaction transaction) {
+	public List<Transaction> miniStatements(Transaction transaction) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Transaction.class);
 		List<Transaction> transactionDetails = (List<Transaction>) criteria.list();
-		List<Object> list = new ArrayList<>();
+		List<Transaction> list = new ArrayList<>();
 		for (Transaction transact : transactionDetails) {
 			if (transact.getAccountNumber().equals(transaction.getAccountNumber()))
 				list.add(transact);

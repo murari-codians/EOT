@@ -8,6 +8,6 @@ public interface TransactionDao {
 
 	public void deposite(Transaction transaction);
 	
-	public List<Object> miniStatements(Transaction transaction);
+	public List<Transaction> miniStatements(Transaction transaction);
 	
 }
