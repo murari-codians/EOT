@@ -69,7 +69,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
 	SuperAdminDao adminDao;
-	
+
 	@Autowired
 	CustomerDao customerDao;
 
@@ -78,14 +78,14 @@ public class TransactionServiceImpl implements TransactionService {
 	public void deposite(String agentId, Transaction transaction) throws EotException {
 
 		Agent agent = agentDao.findAgentByUserId(agentId);
-		Customer customer  = customerDao.findCustomerByAccountNo(transaction.getAccountNumber());
+		Customer customer = customerDao.findCustomerByAccountNo(transaction.getAccountNumber());
 
 		if (agent != null) {
 			if (agent.getUserType() == LoginTypes.AGENT.getValue()
 					|| agent.getUserType() == LoginTypes.AGENTSOLEMERCHANT.getValue()) {
 
-				if(customer!=null) {
-					
+				if (customer != null) {
+
 					Login login = loginDao.findLoginByUserId(agent.getCreatedBy());
 
 					SuperAdmin superAdmin = adminDao.getAdmin();
@@ -104,11 +104,12 @@ public class TransactionServiceImpl implements TransactionService {
 							if (transaction.getTransactionType().equals(serviceChargeSplit.getTransactionType())) {
 								serviceCharge = customerAmount * (1 / serviceChargeSplit.getServiceChargePercentage());
 								customerAmount = customerAmount - serviceCharge;
-								
+
 								ServiceCharge serviceChargeDetails = new ServiceCharge();
 								serviceChargeDetails.setEntityId(entiti.getUserId());
 								serviceChargeDetails.setTransactionType(serviceChargeSplit.getTransactionType());
-								serviceChargeDetails.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
+								serviceChargeDetails
+										.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
 								serviceChargeDetails.setServiceCharge(serviceCharge);
 								superAdmin.getServiceCharge().add(serviceChargeDetails);
 								adminDao.saveOrUpadte(superAdmin);
@@ -117,13 +118,12 @@ public class TransactionServiceImpl implements TransactionService {
 						}
 
 						if (transaction.getTransactionAmount() >= entiti.getTransactionLimit().getTransactionMin()
-								&& transaction.getTransactionAmount() <= entiti.getTransactionLimit().getTransactionMax()) {
+								&& transaction.getTransactionAmount() <= entiti.getTransactionLimit()
+										.getTransactionMax()) {
 							Double entityCommission = totalCommission * (1.0 / 10.0);
 							totalCommission = totalCommission - entityCommission;
 							commissionAmount = addEntitCommission(entityCommission, commissionAmount);
 						}
-						
-					
 
 					} else if (login.getUserType() == LoginTypes.DISTRIBUTER.getValue()) {
 
@@ -137,7 +137,8 @@ public class TransactionServiceImpl implements TransactionService {
 								ServiceCharge serviceChargeDetails = new ServiceCharge();
 								serviceChargeDetails.setEntityId(entiti.getUserId());
 								serviceChargeDetails.setTransactionType(serviceChargeSplit.getTransactionType());
-								serviceChargeDetails.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
+								serviceChargeDetails
+										.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
 								serviceChargeDetails.setServiceCharge(serviceCharge);
 								superAdmin.getServiceCharge().add(serviceChargeDetails);
 								adminDao.saveOrUpadte(superAdmin);
@@ -158,14 +159,16 @@ public class TransactionServiceImpl implements TransactionService {
 						}
 
 						if (distributer != null) {
-							if (transaction.getTransactionAmount() >= distributer.getTransactionLimit().getTransactionMin()
+							if (transaction.getTransactionAmount() >= distributer.getTransactionLimit()
+									.getTransactionMin()
 									&& transaction.getTransactionAmount() <= distributer.getTransactionLimit()
 											.getTransactionMax()) {
 								for (Commission commission : distributer.getCommissions()) {
 
 									if (transaction.getTransactionAmount() >= commission.getMinAmount()
 											&& transaction.getTransactionAmount() <= commission.getMaxAmount()) {
-										Double distributerCommission = totalCommission * (1 / commission.getCommission());
+										Double distributerCommission = totalCommission
+												* (1 / commission.getCommission());
 										commissionAmount = addDistributerCommission(distributerCommission,
 												commissionAmount);
 										totalCommission = totalCommission - distributerCommission;
@@ -178,7 +181,8 @@ public class TransactionServiceImpl implements TransactionService {
 
 						Wholeseller wholeseller = wholesellerDao.findWholesellerByUserId(login.getUserId());
 
-						Distributer distributer = distributerDao.findDistributerByUserId(wholeseller.getDistributerId());
+						Distributer distributer = distributerDao
+								.findDistributerByUserId(wholeseller.getDistributerId());
 
 						Entiti entiti = mgurushDao.findEntitiByUserId(distributer.getEntitiId());
 
@@ -186,11 +190,12 @@ public class TransactionServiceImpl implements TransactionService {
 							if (transaction.getTransactionType().equals(serviceChargeSplit.getTransactionType())) {
 								serviceCharge = customerAmount * (1 / serviceChargeSplit.getServiceChargePercentage());
 								customerAmount = customerAmount - serviceCharge;
-								
+
 								ServiceCharge serviceChargeDetails = new ServiceCharge();
 								serviceChargeDetails.setEntityId(entiti.getUserId());
 								serviceChargeDetails.setTransactionType(serviceChargeSplit.getTransactionType());
-								serviceChargeDetails.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
+								serviceChargeDetails
+										.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
 								serviceChargeDetails.setServiceCharge(serviceCharge);
 								superAdmin.getServiceCharge().add(serviceChargeDetails);
 								adminDao.saveOrUpadte(superAdmin);
@@ -212,14 +217,16 @@ public class TransactionServiceImpl implements TransactionService {
 						}
 
 						if (distributer != null) {
-							if (transaction.getTransactionAmount() >= distributer.getTransactionLimit().getTransactionMin()
+							if (transaction.getTransactionAmount() >= distributer.getTransactionLimit()
+									.getTransactionMin()
 									&& transaction.getTransactionAmount() <= distributer.getTransactionLimit()
 											.getTransactionMax()) {
 								for (Commission commission : distributer.getCommissions()) {
 
 									if (transaction.getTransactionAmount() >= commission.getMinAmount()
 											&& transaction.getTransactionAmount() <= commission.getMaxAmount()) {
-										Double distributerCommission = totalCommission * (1 / commission.getCommission());
+										Double distributerCommission = totalCommission
+												* (1 / commission.getCommission());
 										commissionAmount = addDistributerCommission(distributerCommission,
 												commissionAmount);
 										totalCommission = totalCommission - distributerCommission;
@@ -229,14 +236,16 @@ public class TransactionServiceImpl implements TransactionService {
 						}
 
 						if (wholeseller != null) {
-							if (transaction.getTransactionAmount() >= wholeseller.getTransactionLimit().getTransactionMin()
+							if (transaction.getTransactionAmount() >= wholeseller.getTransactionLimit()
+									.getTransactionMin()
 									&& transaction.getTransactionAmount() <= wholeseller.getTransactionLimit()
 											.getTransactionMax()) {
 								for (Commission commission : wholeseller.getCommissions()) {
 
 									if (transaction.getTransactionAmount() >= commission.getMinAmount()
 											&& transaction.getTransactionAmount() <= commission.getMaxAmount()) {
-										Double wholesellerCommission = totalCommission * (1.0 / commission.getCommission());
+										Double wholesellerCommission = totalCommission
+												* (1.0 / commission.getCommission());
 										commissionAmount = addWholesellerCommission(wholesellerCommission,
 												commissionAmount);
 										totalCommission = totalCommission - wholesellerCommission;
@@ -251,7 +260,8 @@ public class TransactionServiceImpl implements TransactionService {
 
 						Wholeseller wholeseller = wholesellerDao.findWholesellerByUserId(retailer.getWholesellerId());
 
-						Distributer distributer = distributerDao.findDistributerByUserId(wholeseller.getDistributerId());
+						Distributer distributer = distributerDao
+								.findDistributerByUserId(wholeseller.getDistributerId());
 
 						Entiti entiti = mgurushDao.findEntitiByUserId(distributer.getEntitiId());
 
@@ -259,11 +269,12 @@ public class TransactionServiceImpl implements TransactionService {
 							if (transaction.getTransactionType().equals(serviceChargeSplit.getTransactionType())) {
 								serviceCharge = customerAmount * (1 / serviceChargeSplit.getServiceChargePercentage());
 								customerAmount = customerAmount - serviceCharge;
-								
+
 								ServiceCharge serviceChargeDetails = new ServiceCharge();
 								serviceChargeDetails.setEntityId(entiti.getUserId());
 								serviceChargeDetails.setTransactionType(serviceChargeSplit.getTransactionType());
-								serviceChargeDetails.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
+								serviceChargeDetails
+										.setTransactionTypeName(serviceChargeSplit.getTransactionTypeName());
 								serviceChargeDetails.setServiceCharge(serviceCharge);
 								superAdmin.getServiceCharge().add(serviceChargeDetails);
 								adminDao.saveOrUpadte(superAdmin);
@@ -285,14 +296,16 @@ public class TransactionServiceImpl implements TransactionService {
 						}
 
 						if (distributer != null) {
-							if (transaction.getTransactionAmount() >= distributer.getTransactionLimit().getTransactionMin()
+							if (transaction.getTransactionAmount() >= distributer.getTransactionLimit()
+									.getTransactionMin()
 									&& transaction.getTransactionAmount() <= distributer.getTransactionLimit()
 											.getTransactionMax()) {
 								for (Commission commission : distributer.getCommissions()) {
 
 									if (transaction.getTransactionAmount() >= commission.getMinAmount()
 											&& transaction.getTransactionAmount() <= commission.getMaxAmount()) {
-										Double distributerCommission = totalCommission * (1 / commission.getCommission());
+										Double distributerCommission = totalCommission
+												* (1 / commission.getCommission());
 										commissionAmount = addDistributerCommission(distributerCommission,
 												commissionAmount);
 										totalCommission = totalCommission - distributerCommission;
@@ -302,14 +315,16 @@ public class TransactionServiceImpl implements TransactionService {
 						}
 
 						if (wholeseller != null) {
-							if (transaction.getTransactionAmount() >= wholeseller.getTransactionLimit().getTransactionMin()
+							if (transaction.getTransactionAmount() >= wholeseller.getTransactionLimit()
+									.getTransactionMin()
 									&& transaction.getTransactionAmount() <= wholeseller.getTransactionLimit()
 											.getTransactionMax()) {
 								for (Commission commission : wholeseller.getCommissions()) {
 
 									if (transaction.getTransactionAmount() >= commission.getMinAmount()
 											&& transaction.getTransactionAmount() <= commission.getMaxAmount()) {
-										Double wholesellerCommission = totalCommission * (1 / commission.getCommission());
+										Double wholesellerCommission = totalCommission
+												* (1 / commission.getCommission());
 										commissionAmount = addWholesellerCommission(wholesellerCommission,
 												commissionAmount);
 										totalCommission = totalCommission - wholesellerCommission;
@@ -337,15 +352,15 @@ public class TransactionServiceImpl implements TransactionService {
 					commissionAmount.setAgentId(agentId);
 					commissionAmount.setAgentCommission(totalCommission);
 					commissionAmountDao.addCommissionAmount(commissionAmount);
-					
+
 					customer.setCustomerId(customer.getCustomerId());
-					customer.setAccountBalance(customer.getAccountBalance()+customerAmount);
-					
+					customer.setAccountBalance(customer.getAccountBalance() + customerAmount);
+
 					transaction.setAgentId(agentId);
 					transaction.setStatus(EOTConstant.TRANSACTION_STATUS_SUCESS);
 					transaction.setTransactionID(transactionIdGenerator.transactionIdGenerator());
 					transactionDao.deposite(transaction);
-				}else {
+				} else {
 					throw new EotException("customer does not exits");
 				}
 
@@ -384,22 +399,32 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<Transaction> miniStatement(String agentId, Transaction transaction) throws EotException {
-		
+
 		Agent agent = agentDao.findAgentByUserId(agentId);
 		Customer customer = customerDao.findCustomerByAccountNo(transaction.getAccountNumber());
-		if(agent != null) {
-			if(customer != null) {
+		if (agent != null) {
+			if (customer != null) {
 				List<Transaction> list = transactionDao.miniStatements(transaction);
-				
+
 				return list;
-			}else {
+			} else {
 				throw new EotException(EOTConstant.CUSTOMER_DOESNOT_EXISTS);
 			}
-		}else {
+		} else {
 			throw new EotException(EOTConstant.AGENT_NOT_FOUND);
+
 		}
-		
-		
+
+	}
+
+	@Override
+	public Double balanceEnquiry(String accountNumber) throws EotException {
+		Customer customer = customerDao.findCustomerByAccountNo(accountNumber);
+		if (customer != null) {
+			return customer.getAccountBalance();
+		} else {
+			throw new EotException(EOTConstant.CUSTOMER_DOESNOT_EXISTS);
+		}
 	}
 
 }
